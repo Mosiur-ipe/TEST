@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>T.E.S.T Shop — Coming Soon | Technical Exam Support Toolkit</title>
+<meta name="description" content="T.E.S.T Shop — buy and sell daily-use engineering essentials like drafting tools, lab coats, calculators, and stationery within your student community. Coming soon."/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#1a4fe0"/>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a4fe0'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='22' fill='white'%3ET%3C/text%3E%3Ccircle cx='48' cy='16' r='8' fill='%2300b896'/%3E%3C/svg%3E"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a4fe0'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='22' fill='white'%3ET%3C/text%3E%3Ccircle cx='48' cy='16' r='8' fill='%2300b896'/%3E%3C/svg%3E"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --bg:      #ffffff;
+  --bg2:     #f5f7fa;
+  --bg3:     #eef1f6;
+  --surface: #ffffff;
+  --surface2:#f0f3f8;
+  --accent:  #1a4fe0;
+  --accent2: #00b896;
+  --accent3: #f05a22;
+  --text:    #0d1526;
+  --text2:   #4a5675;
+  --text3:   #8e9bb8;
+  --border:  rgba(0,0,0,0.09);
+  --shadow:  0 2px 12px rgba(0,0,0,0.07);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Roboto Condensed',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 5%;box-shadow:var(--shadow);}
+.nav-inner{display:flex;align-items:center;gap:2rem;height:64px;}
+.logo{font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:0.02em;color:var(--text);text-decoration:none;flex-shrink:0;}
+.logo span{color:var(--accent);}
+.logo em{color:var(--accent2);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:0.15rem;flex:1;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.9rem;font-weight:500;padding:0.4rem 0.8rem;border-radius:7px;transition:all 0.18s;cursor:pointer;}
+.nav-links a:hover{color:var(--accent);background:rgba(26,79,224,0.07);}
+/* UNIVERSITY DROPDOWN */
+.nav-dropdown{position:relative;}
+.nav-dropdown-trigger{display:flex;align-items:center;gap:0.3rem;cursor:pointer;user-select:none;}
+.nav-chevron{font-size:0.7rem;transition:transform 0.2s;}
+.nav-dropdown.open .nav-chevron{transform:rotate(180deg);}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);background:#fff;border:1.5px solid var(--border);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,0.13);padding:0.6rem;min-width:420px;z-index:300;animation:fadeUp 0.18s ease both;}
+.nav-dropdown.open .nav-dropdown-menu{display:block;}
+.uni-drop-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.35rem;}
+.uni-drop-item{display:flex;align-items:center;gap:0.7rem;padding:0.6rem 0.75rem;border-radius:10px;cursor:pointer;transition:background 0.15s;text-decoration:none;color:inherit;}
+.uni-drop-item:hover{background:var(--bg2);}
+.udi-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.88rem;flex-shrink:0;}
+.udi-logo-img{background:#fff;border:1px solid var(--border);padding:3px;}
+.udi-logo-img img{width:100%;height:100%;object-fit:contain;}
+.udi-info{display:flex;flex-direction:column;gap:0.05rem;}
+.udi-info strong{font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:700;color:var(--text);}
+.udi-info small{font-size:0.68rem;color:var(--text3);font-weight:400;line-height:1.3;}
+.uni-drop-all{border-top:1px solid var(--border);grid-column:1/-1;margin-top:0.15rem;padding-top:0.6rem;}
+.dept-drop-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.35rem;}
+.nav-right{display:flex;align-items:center;gap:0.75rem;margin-left:auto;}
+.btn-ghost{background:none;border:1.5px solid var(--border);color:var(--text2);padding:0.45rem 1.1rem;border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:0.88rem;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:0.45rem 1.2rem;border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.btn-primary:hover{background:#1640cc;transform:translateY(-1px);box-shadow:0 4px 14px rgba(26,79,224,0.35);}
+
+/* COMING STRIP */
+.coming-strip{background:linear-gradient(90deg,rgba(26,79,224,0.06),rgba(0,184,150,0.06));border-bottom:1px solid rgba(26,79,224,0.12);padding:0.6rem 5%;display:flex;align-items:center;gap:1rem;font-size:0.83rem;color:var(--text2);}
+.cs-badge{background:var(--accent3);color:#fff;font-size:0.7rem;font-weight:700;padding:0.15rem 0.55rem;border-radius:5px;text-transform:uppercase;letter-spacing:0.05em;}
+
+.founder-card{transition:transform 0.3s ease,box-shadow 0.3s ease,border-color 0.3s ease;}
+.founder-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(26,79,224,0.16);border-color:rgba(26,79,224,0.3);}
+.founder-card img{transition:transform 0.3s ease;}
+.founder-card:hover img{transform:scale(1.04);}
+
+/* HERO */
+.hero{position:relative;padding:2.5rem 5% 5rem;min-height:580px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:linear-gradient(135deg,#f0f4ff 0%,#ffffff 50%,#f0fdf9 100%);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(26,79,224,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(26,79,224,0.06) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 80% 90% at 50% 50%,black 0%,transparent 75%);}
+.hero-content{position:relative;z-index:2;max-width:1100px;width:100%;margin:0 auto;display:flex;flex-direction:column;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(26,79,224,0.09);border:1px solid rgba(26,79,224,0.2);color:var(--accent);padding:0.35rem 0.9rem;border-radius:20px;font-size:0.78rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:1.5rem;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,4.4vw,3.1rem);font-weight:700;line-height:1.15;letter-spacing:-0.01em;margin-bottom:1.25rem;color:var(--text);text-align:center;max-width:100%;}
+h1 .line2{color:var(--accent2);}
+h1 .line3{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;}
+.hero-sub{font-size:1.05rem;color:var(--text2);line-height:1.7;max-width:560px;margin:0 auto 2.5rem;font-weight:400;text-align:center;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.hero-icon-actions{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;}
+.hero-icon-btn{display:flex;flex-direction:column;align-items:center;gap:0.65rem;cursor:pointer;text-decoration:none;background:none;border:none;font-family:inherit;}
+.hero-icon-circle{width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.7rem;box-shadow:var(--shadow-md);transition:all 0.2s;}
+.hero-icon-btn:hover .hero-icon-circle{transform:translateY(-4px);box-shadow:0 10px 26px rgba(26,79,224,0.22);}
+.hero-icon-label{font-size:0.88rem;font-weight:700;color:var(--text);font-family:'Roboto Condensed',sans-serif;letter-spacing:0.01em;}
+.btn-lg{padding:0.75rem 1.8rem;border-radius:10px;font-size:0.95rem;font-weight:600;cursor:pointer;font-family:'Roboto Condensed',sans-serif;transition:all 0.2s;}
+.btn-accent{background:var(--accent);color:#fff;border:none;}
+.btn-accent:hover{background:#1640cc;transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,79,224,0.3);}
+.btn-outline{background:#fff;border:1.5px solid var(--border);color:var(--text2);box-shadow:var(--shadow);}
+.btn-outline:hover{border-color:var(--accent2);color:var(--accent2);}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);justify-content:center;flex-wrap:wrap;}
+.stat-val{font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:700;color:var(--text);}
+.stat-val span{color:var(--accent2);}
+.stat-label{font-size:0.8rem;color:var(--text3);margin-top:0.1rem;}
+
+
+
+/* SEARCH */
+.search-section{padding:2.5rem 5% 2rem;background:var(--bg2);}
+.search-box{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:0.45rem 0.45rem 0.45rem 1.2rem;display:flex;align-items:center;gap:0.75rem;max-width:780px;margin:0 auto;box-shadow:var(--shadow);transition:border-color 0.2s,box-shadow 0.2s;}
+.search-box:focus-within{border-color:rgba(26,79,224,0.45);box-shadow:0 0 0 3px rgba(26,79,224,0.1);}
+.search-box input{flex:1;background:none;border:none;outline:none;color:var(--text);font-family:'Roboto Condensed',sans-serif;font-size:0.98rem;}
+.search-box input::placeholder{color:var(--text3);}
+.search-icon{color:var(--text3);font-size:1.1rem;}
+.search-btn{background:var(--accent);color:#fff;border:none;padding:0.6rem 1.5rem;border-radius:10px;font-family:'Roboto Condensed',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.search-btn:hover{background:#1640cc;}
+
+
+/* SECTIONS */
+.section{padding:4rem 5%;}
+.sec-header{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.6rem;margin-bottom:2rem;}
+.sec-title{font-family:'Montserrat',sans-serif;font-size:1.55rem;font-weight:700;color:var(--text);}
+.sec-title span{color:var(--accent2);}
+.sec-link{color:var(--accent);font-size:0.85rem;text-decoration:none;font-weight:500;}
+.sec-link:hover{text-decoration:underline;}
+
+/* DEPT GRID */
+.dept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+.dept-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:1.25rem 1.25rem 1rem;cursor:pointer;transition:all 0.22s;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.dept-card:hover{transform:translateY(-3px);border-color:rgba(26,79,224,0.3);box-shadow:var(--shadow-md);}
+.dept-icon{font-size:1.8rem;margin-bottom:0.75rem;display:block;}
+.dept-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:0.25rem;color:var(--text);}
+.dept-meta{font-size:0.78rem;color:var(--text3);}
+.dept-count{position:absolute;top:1rem;right:1rem;background:rgba(26,79,224,0.08);color:var(--accent);font-size:0.7rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:10px;}
+.dept-context-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(26,79,224,0.07);border:1px solid rgba(26,79,224,0.18);color:var(--accent);padding:0.45rem 1rem;border-radius:20px;font-size:0.82rem;font-weight:600;margin-bottom:1.25rem;flex-wrap:wrap;}
+.dept-context-badge .dcb-icon{font-size:0.95rem;}
+.dept-context-badge .dcb-dot{color:var(--text3);font-weight:400;}
+.dept-context-badge .dcb-sub{color:var(--text2);font-weight:500;}
+.uni-card-bubble{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1rem;margin-bottom:0.75rem;}
+.uni-card-bubble.logo-img{background:#fff;border:1px solid var(--border);padding:4px;}
+.uni-card-bubble.logo-img img{width:100%;height:100%;object-fit:contain;}
+
+
+/* FEATURES */
+.features{padding:4rem 5%;background:var(--bg2);}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:2rem;}
+.feat-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.feat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;}
+.feat-card:nth-child(1) .feat-icon{background:rgba(26,79,224,0.1);}
+.feat-card:nth-child(2) .feat-icon{background:rgba(0,184,150,0.1);}
+.feat-card:nth-child(3) .feat-icon{background:rgba(240,90,34,0.1);}
+.feat-card:nth-child(4) .feat-icon{background:rgba(168,85,247,0.1);}
+.feat-card:nth-child(5) .feat-icon{background:rgba(234,88,12,0.1);}
+.feat-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin-bottom:0.5rem;color:var(--text);}
+.feat-desc{font-size:0.85rem;color:var(--text2);line-height:1.65;font-weight:400;}
+.feat-badge{display:inline-block;margin-top:0.75rem;background:rgba(0,184,150,0.1);color:var(--accent2);font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:6px;font-weight:600;}
+
+/* UNIVERSITIES */
+.uni-section{padding:4rem 5%;}
+.uni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:1.5rem;}
+.uni-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.85rem;box-shadow:var(--shadow);}
+.uni-card:hover{border-color:rgba(0,184,150,0.4);transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.uni-logo{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.85rem;flex-shrink:0;}
+.uni-logo.logo-img{background:#fff;border:1px solid var(--border);padding:4px;}
+.uni-logo.logo-img img{width:100%;height:100%;object-fit:contain;}
+.uni-code{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.88rem;color:var(--text);}
+.uni-name{font-size:0.72rem;color:var(--text3);margin-top:0.1rem;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);backdrop-filter:blur(6px);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border:1px solid var(--border);border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;padding:2rem;box-shadow:0 20px 60px rgba(0,0,0,0.15);}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;}
+.modal-title{font-family:'Montserrat',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text);}
+.modal-close{background:var(--bg3);border:none;color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:var(--border);color:var(--text);}
+.form-group{margin-bottom:1rem;}
+.form-label{font-size:0.82rem;color:var(--text2);margin-bottom:0.4rem;display:block;font-weight:600;}
+.form-select,.form-input{width:100%;background:#fff;border:1.5px solid var(--border);color:var(--text);padding:0.7rem 0.9rem;border-radius:10px;font-family:'Roboto Condensed',sans-serif;font-size:0.92rem;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.form-select:focus,.form-input:focus{border-color:rgba(26,79,224,0.5);box-shadow:0 0 0 3px rgba(26,79,224,0.08);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.result-list{margin-top:1.25rem;display:flex;flex-direction:column;gap:0.75rem;}
+.result-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.1rem;}
+.result-item-top{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.4rem;}
+.result-item-title{font-size:0.88rem;font-weight:400;line-height:1.55;color:var(--text);}
+.result-item-meta{font-size:0.75rem;color:var(--text3);margin-top:0.3rem;}
+.result-item-actions{display:flex;gap:0.5rem;margin-top:0.65rem;}
+.r-btn{background:#fff;border:1.5px solid var(--border);color:var(--text2);padding:0.3rem 0.8rem;border-radius:7px;font-size:0.78rem;font-weight:500;cursor:pointer;transition:all 0.18s;font-family:'Roboto Condensed',sans-serif;}
+.r-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+.r-btn:hover{border-color:var(--accent);color:var(--accent);}
+.r-btn.primary:hover{background:#1640cc;}
+
+/* FOOTER */
+footer{background:#ffffff;border-top:1px solid rgba(0,0,0,0.09);padding:4rem 5% 0;}
+.footer-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem;}
+@media(max-width:1100px){.footer-top{grid-template-columns:1fr 1fr 1fr;}}
+@media(max-width:660px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:420px){.footer-top{grid-template-columns:1fr;}}
+.footer-brand-col{}
+.footer-brand-tagline{font-size:0.8rem;color:#4a5675;margin-top:0.6rem;line-height:1.7;max-width:240px;}
+.footer-brand-desc{font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:0.5rem;line-height:1.65;max-width:250px;}
+.footer-socials{display:flex;gap:0.55rem;margin-top:1.1rem;flex-wrap:wrap;}
+.footer-social-btn{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.1);color:#4a5675;text-decoration:none;font-size:0.75rem;font-weight:600;padding:0.35rem 0.75rem;border-radius:7px;transition:all 0.2s;font-family:'Roboto Condensed',sans-serif;letter-spacing:0.03em;}
+.footer-social-btn:hover{background:rgba(26,79,224,0.1);border-color:rgba(26,79,224,0.4);color:#1a4fe0;}
+.footer-col-dark{}
+.footer-col-dark h4{font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#8e9bb8;margin-bottom:1rem;}
+.footer-col-dark a{display:block;color:#4a5675;text-decoration:none;font-size:0.83rem;margin-bottom:0.55rem;transition:color 0.18s;line-height:1.4;}
+.footer-col-dark a:hover{color:var(--accent2);}
+.footer-col-dark .coming-tag{display:inline-block;font-size:0.62rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;background:rgba(240,90,34,0.18);color:var(--accent3);padding:0.1rem 0.45rem;border-radius:4px;margin-left:0.35rem;vertical-align:middle;}
+.footer-divider{height:1px;background:rgba(0,0,0,0.08);margin:0 0 1.5rem;}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0 1.5rem;font-size:0.78rem;color:#8e9bb8;flex-wrap:wrap;gap:0.75rem;}
+.footer-bottom-tagline{font-style:italic;color:#c0c8d8;}
+
+/* SOLUTION MODAL EXTRAS */
+.sol-question-text{font-size:1rem;font-weight:500;line-height:1.6;color:var(--text);background:var(--bg2);border-left:3px solid var(--accent);padding:1rem 1.2rem;border-radius:0 10px 10px 0;margin:1rem 0;}
+.sol-box{background:#f0fdf9;border:1.5px solid rgba(0,184,150,0.25);border-radius:12px;padding:1rem 1.2rem;margin-top:0.75rem;}
+.sol-box-label{font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent2);margin-bottom:0.5rem;}
+.sol-box-text{font-size:0.88rem;line-height:1.65;color:var(--text2);}
+.ref-box{background:#fffbf0;border:1.5px solid rgba(240,90,34,0.2);border-radius:12px;padding:0.85rem 1.2rem;margin-top:0.75rem;}
+.ref-box-label{font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent3);margin-bottom:0.4rem;}
+.ref-box-text{font-size:0.85rem;color:var(--text2);font-style:italic;}
+.unsolved-note{background:var(--bg3);border:1.5px solid var(--border);border-radius:10px;padding:0.85rem 1.1rem;font-size:0.85rem;color:var(--text3);text-align:center;margin-top:0.75rem;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:#c8d0e0;border-radius:3px;}
+
+/* ══════════════════ T.E.S.T MART APP ══════════════════ */
+.mart-section{padding-top:2.5rem;}
+.mart-wrap{max-width:1080px;margin:0 auto;}
+.mart-view{display:none;}
+.mart-view.active{display:block;animation:martFade 0.25s ease both;}
+@keyframes martFade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.mart-crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:0.4rem;font-size:0.82rem;color:var(--text3);margin-bottom:1.75rem;}
+.mart-crumbs .mc-link{color:var(--accent);cursor:pointer;font-weight:600;}
+.mart-crumbs .mc-link:hover{text-decoration:underline;}
+.mart-crumbs .mc-sep{color:var(--text3);opacity:0.6;}
+.mart-crumbs .mc-here{color:var(--text2);font-weight:600;}
+
+.mart-h1{font-family:'Montserrat',sans-serif;font-size:1.45rem;font-weight:700;color:var(--text);margin-bottom:0.35rem;}
+.mart-sub{font-size:0.9rem;color:var(--text2);margin-bottom:1.75rem;line-height:1.6;max-width:640px;}
+
+/* Department grid */
+.mart-dept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;}
+.mart-dept-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:1.2rem 1.1rem;cursor:pointer;transition:all 0.2s;box-shadow:var(--shadow);position:relative;text-align:left;}
+.mart-dept-card.available:hover{transform:translateY(-3px);border-color:rgba(26,79,224,0.35);box-shadow:var(--shadow-md);}
+.mart-dept-card.locked{opacity:0.62;cursor:default;}
+.mart-dept-icon{font-size:1.5rem;margin-bottom:0.65rem;display:block;}
+.mart-dept-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.92rem;color:var(--text);margin-bottom:0.45rem;}
+.mart-dept-tag{display:inline-block;font-size:0.66rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:6px;}
+.mart-dept-tag.live{background:rgba(0,184,150,0.12);color:var(--accent2);}
+.mart-dept-tag.soon{background:rgba(240,90,34,0.1);color:var(--accent3);}
+
+/* Category chips */
+.mart-chip-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.mart-section-tabs{display:flex;gap:0.5rem;margin:1.1rem 0 1.1rem;border-bottom:1.5px solid var(--border);}
+.mart-section-tab{background:none;border:none;padding:0.6rem 0.25rem;margin-right:1.5rem;font-family:'Roboto Condensed',sans-serif;font-size:0.95rem;font-weight:600;color:var(--text3);cursor:pointer;position:relative;top:1.5px;border-bottom:2.5px solid transparent;transition:color 0.18s;}
+.mart-section-tab:hover{color:var(--text2);}
+.mart-section-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.mart-chip{background:#fff;border:1.5px solid var(--border);color:var(--text2);padding:0.4rem 0.95rem;border-radius:20px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.18s;font-family:'Roboto Condensed',sans-serif;white-space:nowrap;}
+.mart-chip:hover{border-color:var(--accent);color:var(--accent);}
+.mart-chip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* Product grid */
+.mart-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.1rem;}
+.mart-card{background:#fff;border:1.5px solid var(--border);border-radius:16px;padding:1.15rem;box-shadow:var(--shadow);transition:all 0.2s;display:flex;flex-direction:column;}
+.mart-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(26,79,224,0.25);}
+.mart-card-icon{width:52px;height:52px;border-radius:12px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:0.85rem;overflow:hidden;}
+.mart-card-icon img{width:100%;height:100%;object-fit:cover;}
+.mart-card-cat{font-size:0.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;margin-bottom:0.3rem;}
+.mart-card-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.92rem;color:var(--text);margin-bottom:0.4rem;line-height:1.3;}
+.mart-card-price{font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:var(--accent);margin-bottom:0.3rem;}
+.mart-stock{font-size:0.76rem;font-weight:600;margin-bottom:0.9rem;}
+.mart-stock.in{color:var(--accent2);}
+.mart-stock.low{color:#e0982b;}
+.mart-stock.out{color:#ef4444;}
+.mart-card-actions{display:flex;gap:0.5rem;margin-top:auto;}
+.mart-card-actions .btn-ghost,.mart-card-actions .btn-primary{flex:1;padding:0.5rem 0.6rem;font-size:0.8rem;text-align:center;}
+.mart-empty{text-align:center;padding:3rem 1rem;color:var(--text3);font-size:0.92rem;}
+
+/* Product detail */
+.mart-detail{display:grid;grid-template-columns:280px 1fr;gap:2.25rem;}
+@media(max-width:720px){.mart-detail{grid-template-columns:1fr;}}
+.mart-detail-img{background:var(--bg2);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;aspect-ratio:1;border:1.5px solid var(--border);overflow:hidden;}
+.mart-detail-img img{width:100%;height:100%;object-fit:cover;}
+.mart-detail-name{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+.mart-detail-price{font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);margin-bottom:0.5rem;}
+.mart-detail-desc{color:var(--text2);font-size:0.92rem;line-height:1.7;margin:1rem 0;}
+.mart-spec-list{list-style:none;padding:0;margin:0.5rem 0 1.25rem;}
+.mart-spec-list li{font-size:0.86rem;color:var(--text2);padding:0.35rem 0;border-bottom:1px dashed var(--border);display:flex;gap:0.5rem;}
+.mart-spec-list li::before{content:'✓';color:var(--accent2);font-weight:700;flex-shrink:0;}
+.mart-qty-row{display:flex;align-items:center;gap:1rem;margin:1.25rem 0;}
+.mart-stepper{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.mart-stepper button{background:var(--bg2);border:none;width:38px;height:38px;font-size:1.1rem;font-weight:700;color:var(--text);cursor:pointer;transition:background 0.15s;}
+.mart-stepper button:hover{background:var(--bg3);}
+.mart-stepper input{width:48px;text-align:center;border:none;border-left:1.5px solid var(--border);border-right:1.5px solid var(--border);height:38px;font-family:'Roboto Condensed',sans-serif;font-size:0.95rem;font-weight:600;color:var(--text);}
+.mart-line-total{font-size:0.88rem;color:var(--text2);}
+.mart-line-total strong{color:var(--text);font-family:'Montserrat',sans-serif;}
+.mart-detail-actions{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem;}
+
+/* Cart */
+.mart-cart-item{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);}
+.mart-cart-item-icon{width:46px;height:46px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.mart-cart-item-info{flex:1;min-width:0;}
+.mart-cart-item-name{font-weight:600;font-size:0.9rem;color:var(--text);margin-bottom:0.15rem;}
+.mart-cart-item-price{font-size:0.8rem;color:var(--text3);}
+.mart-cart-item-sub{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.92rem;color:var(--text);min-width:70px;text-align:right;}
+.mart-cart-remove{background:none;border:none;color:var(--text3);font-size:1rem;cursor:pointer;padding:0.3rem;}
+.mart-cart-remove:hover{color:#ef4444;}
+.mart-summary-box{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;margin-top:1.25rem;}
+.mart-sum-row{display:flex;justify-content:space-between;font-size:0.88rem;color:var(--text2);padding:0.3rem 0;}
+.mart-sum-row.total{border-top:1.5px solid var(--border);margin-top:0.5rem;padding-top:0.75rem;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;color:var(--text);}
+
+/* Checkout / info blocks */
+.mart-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem;}
+@media(max-width:600px){.mart-form-grid{grid-template-columns:1fr;}}
+.mart-info-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem;margin-bottom:1rem;}
+.mart-info-title{font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3);margin-bottom:0.6rem;}
+.mart-info-row{display:flex;justify-content:space-between;font-size:0.86rem;padding:0.22rem 0;color:var(--text2);}
+.mart-info-row strong{color:var(--text);font-weight:600;}
+
+/* Payment */
+.mart-pay-box{background:linear-gradient(135deg,rgba(0,184,150,0.06),rgba(26,79,224,0.05));border:1.5px solid rgba(0,184,150,0.25);border-radius:16px;padding:1.5rem 1.6rem;max-width:480px;}
+.mart-pay-amount{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:900;color:var(--accent2);margin:0.35rem 0 1rem;}
+.mart-pay-field{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:0.65rem 0.9rem;margin-bottom:0.6rem;}
+.mart-pay-field-label{font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.04em;font-weight:600;}
+.mart-pay-field-val{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;color:var(--text);}
+.mart-copy-btn{background:none;border:1.5px solid var(--border);border-radius:7px;padding:0.25rem 0.6rem;font-size:0.72rem;font-weight:600;color:var(--accent);cursor:pointer;}
+.mart-copy-btn:hover{background:rgba(26,79,224,0.07);}
+.mart-warn{font-size:0.8rem;color:var(--accent3);background:rgba(240,90,34,0.08);border:1px solid rgba(240,90,34,0.2);border-radius:10px;padding:0.7rem 0.9rem;margin-top:1rem;line-height:1.55;}
+.mart-check-row{display:flex;align-items:center;gap:0.6rem;margin:1.25rem 0;font-size:0.88rem;color:var(--text2);}
+.mart-check-row input{width:17px;height:17px;accent-color:var(--accent2);cursor:pointer;}
+
+/* Confirmation */
+.mart-done{text-align:center;max-width:460px;margin:1rem auto 0;background:#fff;border:1.5px solid var(--border);border-radius:20px;padding:2.5rem 2rem;box-shadow:var(--shadow-md);}
+.mart-done-icon{font-size:2.75rem;margin-bottom:0.75rem;}
+.mart-done-id{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:800;color:var(--accent);margin:0.5rem 0;}
+.mart-status-pill{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(240,90,34,0.1);color:var(--accent3);font-size:0.78rem;font-weight:700;padding:0.3rem 0.8rem;border-radius:20px;margin-top:0.5rem;}
+
+/* Floating cart */
+.mart-cart-fab{position:fixed;bottom:1.75rem;right:1.75rem;z-index:150;background:var(--accent);color:#fff;border:none;width:56px;height:56px;border-radius:50%;font-size:1.4rem;cursor:pointer;box-shadow:0 8px 24px rgba(26,79,224,0.4);display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.mart-cart-fab:hover{transform:translateY(-2px) scale(1.04);}
+.mart-cart-fab.hide{display:none;}
+.mart-cart-badge{position:absolute;top:-4px;right:-4px;background:var(--accent3);color:#fff;font-size:0.68rem;font-weight:800;min-width:19px;height:19px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 3px;font-family:'Roboto Condensed',sans-serif;}
+.mart-cart-badge.zero{display:none;}
+
+/* Admin FAB + modal */
+.mart-admin-fab{position:fixed;bottom:1.75rem;left:1.75rem;z-index:150;background:#fff;color:var(--text2);border:1.5px solid var(--border);padding:0.6rem 1rem;border-radius:30px;font-size:0.85rem;font-weight:600;cursor:pointer;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:0.4rem;font-family:'Roboto Condensed',sans-serif;transition:all 0.2s;}
+.mart-admin-fab:hover{border-color:var(--accent);color:var(--accent);}
+.mart-admin-fab.is-admin{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+.mart-modal-backdrop{position:fixed;inset:0;background:rgba(13,21,38,0.5);z-index:500;display:none;align-items:center;justify-content:center;padding:1.5rem;}
+.mart-modal-backdrop.show{display:flex;}
+.mart-modal{background:#fff;border-radius:18px;padding:1.75rem;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
+.mart-photo-upload-row{display:flex;align-items:center;gap:0.75rem;margin-top:1rem;padding-top:1rem;border-top:1.5px dashed var(--border);}
+.mart-photo-upload-row .btn-ghost{font-size:0.82rem;}
+.mart-photo-upload-note{font-size:0.75rem;color:var(--text3);margin-top:0.4rem;}
+
+/* Edit product modal */
+.mart-modal-wide{max-width:540px;max-height:90vh;overflow-y:auto;}
+.mart-paste-zone{border:1.5px dashed var(--border);border-radius:14px;padding:1.1rem;display:flex;flex-direction:column;align-items:center;gap:0.6rem;cursor:pointer;text-align:center;transition:all 0.18s;outline:none;background:var(--bg2);}
+.mart-paste-zone:hover,.mart-paste-zone:focus{border-color:var(--accent);background:rgba(26,79,224,0.05);}
+.mart-paste-preview{width:84px;height:84px;border-radius:12px;background:#fff;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.mart-paste-preview img{width:100%;height:100%;object-fit:cover;}
+.mart-paste-hint{font-size:0.78rem;color:var(--text3);line-height:1.4;}
+.mart-card-actions .btn-ghost.mart-edit-btn{flex:0 0 auto;padding:0.45rem 0.7rem;}
+
+/* Toast */
+.mart-toast{position:fixed;bottom:1.75rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:#fff;padding:0.7rem 1.3rem;border-radius:10px;font-size:0.85rem;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.25);z-index:400;opacity:0;pointer-events:none;transition:all 0.25s;}
+.mart-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:0 5%;}
+
+/* ── AUTH ENHANCEMENTS ── */
+.auth-brand{text-align:center;margin-bottom:1.75rem;}
+.auth-brand-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.6rem;letter-spacing:-0.02em;color:var(--text);}
+.auth-brand-logo span{color:var(--accent);}
+.auth-brand-sub{font-size:0.78rem;color:var(--text3);margin-top:0.25rem;}
+.auth-divider{display:flex;align-items:center;gap:0.75rem;margin:1.1rem 0;color:var(--text3);font-size:0.78rem;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+.register-steps{display:flex;gap:0;margin-bottom:1.5rem;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.reg-step{flex:1;padding:0.5rem 0.25rem;text-align:center;font-size:0.75rem;font-weight:600;color:var(--text3);background:var(--bg2);transition:all 0.2s;border-right:1px solid var(--border);}
+.reg-step:last-child{border-right:none;}
+.reg-step.active{background:var(--accent);color:#fff;}
+.reg-step.done{background:rgba(0,184,150,0.1);color:var(--accent2);}
+.hsc-year-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.4rem;margin-top:0.4rem;}
+.hsc-year-btn{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:0.45rem;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.18s;font-family:'Roboto Condensed',sans-serif;color:var(--text2);}
+.hsc-year-btn:hover,.hsc-year-btn.selected{background:var(--accent);border-color:var(--accent);color:#fff;}
+.password-strength{display:flex;gap:3px;margin-top:0.4rem;}
+.ps-bar{flex:1;height:3px;border-radius:3px;background:var(--border);transition:background 0.3s;}
+.ps-bar.weak{background:#ef4444;}
+.ps-bar.medium{background:#f59e0b;}
+.ps-bar.strong{background:var(--accent2);}
+.form-input-wrap{position:relative;}
+.form-input-wrap .form-input{padding-right:2.5rem;}
+.pw-toggle{position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);font-size:1rem;padding:0;}
+.pw-toggle:hover{color:var(--accent);}
+.register-benefits{background:linear-gradient(135deg,rgba(26,79,224,0.04),rgba(0,184,150,0.04));border:1.5px solid rgba(26,79,224,0.12);border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.25rem;}
+.rb-title{font-size:0.75rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.6rem;}
+.rb-items{display:grid;grid-template-columns:1fr 1fr;gap:0.35rem;}
+.rb-item{display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;color:var(--text2);}
+.rb-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);flex-shrink:0;}
+
+/* ── NAV AUTH STATE ── */
+.nav-user-btn{display:flex;align-items:center;gap:0.5rem;background:none;border:1.5px solid var(--border);padding:0.35rem 0.75rem 0.35rem 0.4rem;border-radius:30px;cursor:pointer;transition:all 0.2s;font-family:'Roboto Condensed',sans-serif;font-size:0.85rem;font-weight:600;color:var(--text);}
+.nav-user-btn:hover{border-color:var(--accent);color:var(--accent);}
+.nav-avatar{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:0.7rem;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;}
+.nav-coin-chip{display:flex;align-items:center;gap:0.3rem;background:rgba(240,90,34,0.08);border:1.5px solid rgba(240,90,34,0.2);border-radius:20px;padding:0.28rem 0.65rem;font-size:0.8rem;font-weight:700;color:var(--accent3);cursor:pointer;transition:all 0.2s;}
+.nav-coin-chip:hover{background:rgba(240,90,34,0.14);}
+
+/* ── DASHBOARD MODAL ── */
+.dash-header{background:linear-gradient(135deg,var(--accent) 0%,#1640cc 100%);border-radius:14px;padding:1.5rem;color:#fff;margin-bottom:1.25rem;position:relative;overflow:hidden;}
+.dash-header::after{content:'';position:absolute;right:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.07);}
+.dash-name{font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:800;margin-bottom:0.2rem;}
+.dash-uni-tag{font-size:0.78rem;opacity:0.8;margin-bottom:1rem;}
+.dash-coins-big{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;line-height:1;}
+.dash-coins-label{font-size:0.78rem;opacity:0.8;margin-top:0.15rem;}
+.dash-progress-bar{background:rgba(255,255,255,0.25);border-radius:5px;height:6px;margin-top:0.75rem;}
+.dash-progress-fill{background:#fff;border-radius:5px;height:100%;transition:width 0.6s ease;}
+.dash-progress-hint{font-size:0.72rem;opacity:0.75;margin-top:0.3rem;}
+.dash-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-bottom:1.25rem;}
+.dash-stat{background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:0.9rem;text-align:center;}
+.dash-stat-val{font-family:'Montserrat',sans-serif;font-size:1.4rem;font-weight:800;color:var(--text);}
+.dash-stat-val.green{color:var(--accent2);}
+.dash-stat-val.orange{color:var(--accent3);}
+.dash-stat-lbl{font-size:0.72rem;color:var(--text3);margin-top:0.1rem;}
+.dash-section-title{font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem;}
+.dash-upload-btn{width:100%;background:var(--accent2);color:#fff;border:none;padding:0.75rem;border-radius:10px;font-family:'Roboto Condensed',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.2s;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+.dash-upload-btn:hover{background:#009e80;transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,184,150,0.3);}
+.rewards-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.75rem;}
+.reward-card{border:1.5px solid var(--border);border-radius:12px;padding:0.9rem;position:relative;overflow:hidden;}
+.reward-card.locked{opacity:0.55;}
+.reward-card.locked::after{content:'🔒';position:absolute;top:0.6rem;right:0.6rem;font-size:0.9rem;}
+.reward-icon{font-size:1.5rem;margin-bottom:0.4rem;}
+.reward-title{font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:0.2rem;}
+.reward-desc{font-size:0.72rem;color:var(--text3);line-height:1.4;}
+.reward-cost{display:inline-flex;align-items:center;gap:0.25rem;background:rgba(240,90,34,0.1);color:var(--accent3);font-size:0.72rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-top:0.4rem;}
+.dash-signout{width:100%;background:none;border:1.5px solid var(--border);color:var(--text3);padding:0.6rem;border-radius:10px;font-family:'Roboto Condensed',sans-serif;font-size:0.85rem;cursor:pointer;transition:all 0.2s;margin-top:0.5rem;}
+.dash-signout:hover{border-color:#ef4444;color:#ef4444;}
+.dash-skip-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;background:linear-gradient(135deg,rgba(26,79,224,0.07),rgba(0,184,150,0.07));border:1.5px dashed rgba(26,79,224,0.3);color:var(--accent);padding:0.65rem;border-radius:10px;font-family:'Roboto Condensed',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s;margin-top:1rem;letter-spacing:0.01em;}
+.dash-skip-btn:hover{background:linear-gradient(135deg,rgba(26,79,224,0.13),rgba(0,184,150,0.1));border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 14px rgba(26,79,224,0.12);}
+.dash-skip-btn .skip-arrow{font-size:1rem;transition:transform 0.2s;}
+.dash-skip-btn:hover .skip-arrow{transform:translateX(4px);}
+
+/* ── UPLOAD MODAL ── */
+.upload-step{display:none;}
+.upload-step.active{display:block;}
+/* Wizard step dots */
+.up-step-dot{width:28px;height:28px;border-radius:50%;background:var(--bg3);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;color:var(--text3);flex-shrink:0;transition:all 0.25s;}
+.up-step-dot.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.up-step-dot.done{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+.up-step-line{flex:1;height:2px;background:var(--bg3);transition:background 0.25s;}
+.up-step-line.done{background:var(--accent2);}
+.upload-dropzone{border:2.5px dashed var(--border);border-radius:14px;padding:2.5rem;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--bg2);}
+.upload-dropzone:hover,.upload-dropzone.drag-over{border-color:var(--accent2);background:rgba(0,184,150,0.04);}
+.upload-dz-icon{font-size:2.5rem;margin-bottom:0.75rem;}
+.upload-dz-text{font-size:0.9rem;color:var(--text2);font-weight:500;}
+.upload-dz-sub{font-size:0.78rem;color:var(--text3);margin-top:0.3rem;}
+.upload-file-preview{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;}
+.ufp-icon{font-size:1.4rem;}
+.ufp-name{font-size:0.85rem;font-weight:600;color:var(--text);}
+.ufp-size{font-size:0.72rem;color:var(--text3);}
+.ufp-remove{margin-left:auto;background:none;border:none;color:var(--text3);cursor:pointer;font-size:1rem;}
+.coin-earn-preview{background:linear-gradient(135deg,rgba(240,90,34,0.06),rgba(240,90,34,0.02));border:1.5px solid rgba(240,90,34,0.18);border-radius:12px;padding:0.85rem 1rem;display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;}
+.cep-icon{font-size:1.5rem;}
+.cep-text{font-size:0.85rem;color:var(--text2);}
+.cep-coins{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:800;color:var(--accent3);margin-left:auto;}
+.upload-success{text-align:center;padding:1rem 0;}
+.upload-success-anim{font-size:3.5rem;animation:bounceIn 0.5s ease both;}
+@keyframes bounceIn{0%{transform:scale(0.3);opacity:0;}60%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+.upload-success h3{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:800;color:var(--text);margin:0.75rem 0 0.4rem;}
+.upload-success p{font-size:0.88rem;color:var(--text2);line-height:1.6;}
+.coins-earned-badge{display:inline-flex;align-items:center;gap:0.4rem;background:var(--accent3);color:#fff;font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;padding:0.5rem 1.2rem;border-radius:20px;margin:1rem auto;animation:coinPop 0.4s 0.2s ease both;transform:scale(0);}
+@keyframes coinPop{0%{transform:scale(0);}70%{transform:scale(1.15);}100%{transform:scale(1);}}
+
+/* ── COURSE PDF UPLOAD MODAL ── */
+.cpdf-modal{max-width:580px;}
+/* When viewing PYQs (view tab active), expand modal to near-fullscreen */
+.cpdf-modal.cpdf-view-expanded{max-width:96vw;width:96vw;max-height:96vh;}
+
+/* ── FULLSCREEN PYQ VIEWER ── */
+#pyq-fullscreen{position:fixed;inset:0;z-index:900;background:#0d1526;display:none;flex-direction:column;}
+#pyq-fullscreen.open{display:flex;}
+.pyq-fs-header{display:flex;align-items:center;gap:0.75rem;padding:0.85rem 1.25rem;background:#111827;border-bottom:1px solid rgba(255,255,255,0.1);flex-shrink:0;}
+.pyq-fs-back{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:#fff;padding:0.4rem 0.9rem;border-radius:8px;font-family:'Roboto Condensed',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:all 0.18s;}
+.pyq-fs-back:hover{background:rgba(255,255,255,0.18);}
+.pyq-fs-title{font-family:'Montserrat',sans-serif;font-size:0.95rem;font-weight:700;color:#fff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pyq-fs-meta{font-size:0.75rem;color:rgba(255,255,255,0.55);white-space:nowrap;}
+.pyq-fs-body{flex:1;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1.5rem;align-items:center;}
+.pyq-fs-body::-webkit-scrollbar{width:6px;}
+.pyq-fs-body::-webkit-scrollbar-track{background:rgba(255,255,255,0.05);}
+.pyq-fs-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:3px;}
+.pyq-fs-img-card{background:#1a2540;border:1px solid rgba(255,255,255,0.1);border-radius:14px;overflow:hidden;width:100%;max-width:900px;box-shadow:0 4px 24px rgba(0,0,0,0.4);}
+.pyq-fs-img-card img{width:100%;display:block;cursor:zoom-in;object-fit:contain;background:#0d1526;max-height:85vh;}
+.pyq-fs-img-footer{padding:0.65rem 1rem;display:flex;align-items:center;gap:0.6rem;background:#1a2540;border-top:1px solid rgba(255,255,255,0.07);}
+.pyq-fs-img-name{flex:1;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pyq-fs-open-btn{background:var(--accent);color:#fff;border:none;padding:0.35rem 0.8rem;border-radius:7px;font-size:0.75rem;font-weight:600;cursor:pointer;font-family:'Roboto Condensed',sans-serif;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:0.3rem;}
+.pyq-fs-open-btn:hover{background:#1640cc;}
+.pyq-fs-empty{text-align:center;padding:4rem 2rem;color:rgba(255,255,255,0.5);}
+.pyq-fs-empty-icon{font-size:3rem;margin-bottom:1rem;}
+/* Fullscreen expand button in the small modal */
+.cpdf-expand-btn{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:linear-gradient(135deg,rgba(26,79,224,0.08),rgba(0,184,150,0.06));border:1.5px solid rgba(26,79,224,0.2);color:var(--accent);padding:0.55rem 1rem;border-radius:10px;font-family:'Roboto Condensed',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;margin-bottom:0.85rem;transition:all 0.2s;letter-spacing:0.01em;}
+.cpdf-expand-btn:hover{background:rgba(26,79,224,0.14);border-color:rgba(26,79,224,0.4);}
+.cpdf-course-banner{background:linear-gradient(135deg,rgba(26,79,224,0.08),rgba(0,184,150,0.06));border:1.5px solid rgba(26,79,224,0.15);border-radius:12px;padding:0.85rem 1.1rem;margin-bottom:1.25rem;display:flex;align-items:flex-start;gap:0.75rem;}
+.cpdf-course-icon{font-size:1.6rem;flex-shrink:0;}
+.cpdf-course-info strong{font-family:'Montserrat',sans-serif;font-size:0.9rem;font-weight:700;color:var(--text);display:block;}
+.cpdf-course-info small{font-size:0.75rem;color:var(--text3);}
+.cpdf-tabs{display:flex;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.25rem;}
+.cpdf-tab{flex:1;padding:0.55rem 0.5rem;text-align:center;font-size:0.82rem;font-weight:600;color:var(--text3);background:var(--bg2);cursor:pointer;transition:all 0.18s;border-right:1px solid var(--border);}
+.cpdf-tab:last-child{border-right:none;}
+.cpdf-tab.active{background:var(--accent);color:#fff;}
+.cpdf-tab-panel{display:none;}
+.cpdf-tab-panel.active{display:block;}
+.cpdf-upload-progress{display:none;align-items:center;gap:0.75rem;background:rgba(26,79,224,0.06);border:1.5px solid rgba(26,79,224,0.2);border-radius:10px;padding:0.85rem 1rem;margin-top:0.75rem;}
+.cpdf-upload-progress.show{display:flex;}
+.cpdf-progress-bar-wrap{flex:1;background:var(--border);border-radius:4px;height:6px;overflow:hidden;}
+.cpdf-progress-bar-fill{height:100%;background:var(--accent);border-radius:4px;transition:width 0.3s ease;width:0%;}
+.cpdf-progress-label{font-size:0.78rem;color:var(--accent);font-weight:600;white-space:nowrap;}
+/* PDF list panel */
+.cpdf-list-empty{text-align:center;padding:2rem 1rem;}
+.cpdf-list-empty-icon{font-size:2rem;margin-bottom:0.5rem;}
+.cpdf-list-empty-text{font-size:0.85rem;color:var(--text3);}
+.cpdf-list-loading{display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem;font-size:0.85rem;color:var(--text3);}
+.cpdf-spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:cpdfSpin 0.7s linear infinite;flex-shrink:0;}
+@keyframes cpdfSpin{to{transform:rotate(360deg);}}
+.cpdf-pdf-item{display:flex;align-items:center;gap:0.85rem;background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;padding:0.85rem 1rem;margin-bottom:0.6rem;transition:border-color 0.18s;}
+.cpdf-pdf-item:hover{border-color:rgba(26,79,224,0.3);}
+.cpdf-pdf-thumb{width:38px;height:46px;background:rgba(240,90,34,0.1);border:1.5px solid rgba(240,90,34,0.25);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;}
+.cpdf-pdf-info{flex:1;min-width:0;}
+.cpdf-pdf-name{font-size:0.85rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cpdf-pdf-meta{font-size:0.72rem;color:var(--text3);margin-top:0.2rem;}
+.cpdf-pdf-year-badge{display:inline-flex;align-items:center;background:rgba(0,184,150,0.1);color:var(--accent2);font-size:0.68rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:5px;margin-left:0.35rem;}
+.cpdf-view-btn{background:var(--accent);color:#fff;border:none;padding:0.4rem 0.9rem;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:'Roboto Condensed',sans-serif;white-space:nowrap;transition:all 0.18s;}
+.cpdf-view-btn:hover{background:#1640cc;}
+/* Upload button shown inside drill-down course list */
+.dd-course-upload-btn{display:inline-flex;align-items:center;gap:0.3rem;background:rgba(0,184,150,0.1);border:1px solid rgba(0,184,150,0.3);color:var(--accent2);font-size:0.65rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:6px;cursor:pointer;white-space:nowrap;transition:all 0.18s;text-transform:uppercase;letter-spacing:0.04em;flex-shrink:0;}
+.dd-course-upload-btn:hover{background:rgba(0,184,150,0.2);border-color:rgba(0,184,150,0.5);}
+
+/* ── TOAST NOTIFICATION ── */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--text);color:#fff;padding:0.8rem 1.2rem;border-radius:12px;font-size:0.85rem;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.2);z-index:9999;transform:translateY(100px);opacity:0;transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);display:flex;align-items:center;gap:0.6rem;max-width:320px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-icon{font-size:1.2rem;}
+
+/* DEPT DRILL-DOWN */
+.dd-step-label{font-size:0.82rem;color:var(--text3);margin-bottom:1.25rem;display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;}
+.dd-step-label strong{color:var(--text);}
+.dd-back{color:var(--accent);cursor:pointer;font-weight:600;font-size:0.82rem;}
+.dd-back:hover{text-decoration:underline;}
+.dd-breadcrumb-link{color:var(--accent);cursor:pointer;font-weight:600;font-size:0.82rem;padding:0.15rem 0.4rem;border-radius:6px;transition:background 0.15s,color 0.15s;white-space:nowrap;}
+.dd-breadcrumb-link:hover{background:rgba(26,79,224,0.1);text-decoration:underline;}
+.dd-breadcrumb-current{color:var(--text);font-weight:600;font-size:0.82rem;white-space:nowrap;}
+.dd-breadcrumb-sep{color:var(--text3);font-size:0.82rem;margin:0 0.2rem;}
+.dd-breadcrumb-dim{color:var(--text3);font-size:0.82rem;font-weight:400;white-space:nowrap;}
+.dd-uni-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+@media(max-width:500px){.dd-uni-grid{grid-template-columns:1fr;}}
+.dd-uni-card{display:flex;align-items:center;gap:0.85rem;border:1.5px solid var(--border);border-radius:12px;padding:0.85rem 1rem;cursor:pointer;transition:all 0.2s;background:#fff;position:relative;}
+.dd-uni-card:hover:not(.dd-coming){border-color:rgba(26,79,224,0.4);background:rgba(26,79,224,0.03);transform:translateY(-1px);box-shadow:var(--shadow);}
+.dd-coming{opacity:0.55;cursor:default;}
+.dd-uni-logo{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:"Montserrat",sans-serif;font-weight:800;font-size:0.9rem;flex-shrink:0;}
+.dd-uni-logo.logo-img{background:#fff;border:1px solid var(--border);padding:4px;}
+.dd-uni-logo.logo-img img{width:100%;height:100%;object-fit:contain;}
+.dd-uni-code{font-family:"Montserrat",sans-serif;font-weight:700;font-size:0.88rem;color:var(--text);}
+.dd-uni-name{font-size:0.71rem;color:var(--text3);margin-top:0.1rem;}
+.dd-soon-badge{position:absolute;top:0.5rem;right:0.6rem;background:var(--bg3);color:var(--text3);font-size:0.65rem;font-weight:700;padding:0.15rem 0.45rem;border-radius:5px;text-transform:uppercase;letter-spacing:0.04em;}
+.dd-term-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem;}
+@media(max-width:500px){.dd-term-grid{grid-template-columns:1fr 1fr;}}
+.dd-term-card{border:1.5px solid var(--border);border-radius:10px;padding:0.75rem 0.6rem;cursor:pointer;transition:all 0.18s;text-align:center;background:#fff;}
+.dd-term-card:hover{border-color:var(--accent);background:rgba(26,79,224,0.05);transform:translateY(-2px);box-shadow:var(--shadow);}
+.dd-term-level{font-family:"Montserrat",sans-serif;font-weight:700;font-size:0.8rem;color:var(--accent);margin-bottom:0.2rem;}
+.dd-term-name{font-size:0.75rem;color:var(--text2);font-weight:500;}
+.dd-course-section-label{font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);margin-bottom:0.6rem;}
+.dd-course-list{display:flex;flex-direction:column;gap:0.4rem;}
+.dd-course-item{display:flex;align-items:center;gap:0.75rem;padding:0.7rem 0.9rem;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.18s;background:#fff;}
+.dd-course-item:hover{border-color:rgba(26,79,224,0.35);background:rgba(26,79,224,0.04);transform:translateX(3px);}
+.dd-sessional{background:var(--bg2);}
+.dd-sessional:hover{border-color:rgba(0,184,150,0.4);background:rgba(0,184,150,0.04);}
+.dd-course-code{font-family:"Montserrat",sans-serif;font-weight:700;font-size:0.72rem;color:var(--accent);background:rgba(26,79,224,0.08);padding:0.2rem 0.55rem;border-radius:6px;white-space:nowrap;flex-shrink:0;}
+.dd-sessional .dd-course-code{color:var(--accent2);background:rgba(0,184,150,0.1);}
+.dd-course-name{flex:1;font-size:0.85rem;color:var(--text);font-weight:400;}
+.dd-course-arrow{color:var(--text3);font-size:0.85rem;flex-shrink:0;}
+
+/* ABOUT MODAL */
+.about-modal{max-width:600px;}
+.about-section{display:flex;flex-direction:column;gap:0;}
+.about-block{display:flex;gap:1rem;align-items:flex-start;}
+.about-block-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;margin-top:0.1rem;}
+.about-block-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;color:var(--accent);margin-bottom:0.55rem;}
+.about-block-text{font-size:0.87rem;color:var(--text2);line-height:1.75;}
+.about-placeholder{background:var(--bg2);border:1.5px dashed var(--border);border-radius:10px;padding:0.75rem 1rem;font-size:0.84rem;color:var(--text3);}
+.about-divider{height:1px;background:var(--border);margin:1.25rem 0;}
+
+/* CONTACT MODAL */
+.contact-modal{max-width:480px;}
+.contact-section{}
+.contact-card{display:flex;align-items:center;gap:1rem;background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:1.1rem 1.25rem;margin-bottom:1rem;}
+.contact-avatar{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.95rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.contact-name{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.95rem;color:var(--text);margin-bottom:0.15rem;}
+.contact-role{font-size:0.75rem;color:var(--text3);margin-bottom:0.65rem;}
+.contact-email-btn{display:inline-flex;align-items:center;gap:0.45rem;text-decoration:none;color:#fff;background:var(--accent);font-size:0.82rem;font-weight:600;padding:0.4rem 0.9rem;border-radius:8px;font-family:'Roboto Condensed',sans-serif;transition:background 0.2s;}
+.contact-email-btn:hover{background:#1640cc;}
+.contact-note{display:flex;align-items:center;gap:0.6rem;background:rgba(240,90,34,0.07);border:1.5px solid rgba(240,90,34,0.18);border-radius:10px;padding:0.75rem 1rem;font-size:0.82rem;color:var(--text2);line-height:1.5;}
+.contact-note-icon{font-size:1rem;flex-shrink:0;}
+
+/* ALL DEPTS MODAL */
+.all-depts-modal{max-width:860px;}
+.uni-dept-block{margin-bottom:1.75rem;}
+.uni-dept-block:last-child{margin-bottom:0;}
+.uni-dept-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.9rem;padding-bottom:0.65rem;border-bottom:1.5px solid var(--border);}
+.uni-dept-badge{font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.85rem;padding:0.3rem 0.75rem;border-radius:8px;}
+.uni-dept-fullname{font-size:0.78rem;color:var(--text3);font-weight:400;}
+.uni-dept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0.5rem;}
+.uni-dept-item{display:flex;align-items:center;gap:0.55rem;padding:0.55rem 0.75rem;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.18s;background:#fff;font-size:0.82rem;color:var(--text);}
+.uni-dept-item:hover{transform:translateY(-1px);box-shadow:var(--shadow);}
+.uni-dept-item .di-icon{font-size:1rem;flex-shrink:0;}
+.uni-dept-item .di-code{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;flex-shrink:0;}
+.uni-dept-item .di-name{font-size:0.75rem;color:var(--text2);line-height:1.3;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp 0.55s ease both;}
+.delay-1{animation-delay:0.1s;}.delay-2{animation-delay:0.2s;}.delay-3{animation-delay:0.3s;}.delay-4{animation-delay:0.4s;}
+
+/* MOBILE */
+@media(max-width:600px){
+  .nav-links{display:none;}
+  .hero{padding:4.5rem 5% 3rem;}
+  .hero-stats{gap:1.5rem;flex-wrap:wrap;}
+  .q-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+
+/* ═══ PAGE-TRANSITION LOADER ═══ */
+#page-loader{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity 0.35s ease,visibility 0.35s ease;}
+#page-loader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.pl-inner{display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.pl-spinner{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:cpdfSpin 0.7s linear infinite;}
+.pl-text{font-family:'Roboto Condensed',sans-serif;font-size:0.9rem;font-weight:600;color:var(--text2);letter-spacing:0.02em;}
+@keyframes cpdfSpin{to{transform:rotate(360deg);}}
+
+/* ═══ MARKETPLACE HERO ═══ */
+.mkt-hero{padding:4.5rem 5% 3rem;text-align:center;background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);}
+.mkt-hero-icon{width:64px;height:64px;border-radius:18px;background:rgba(0,184,150,0.1);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 1.25rem;}
+.mkt-back-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--text2);text-decoration:none;font-size:0.85rem;font-weight:600;margin-bottom:1.75rem;padding:0.4rem 0.9rem;border:1.5px solid var(--border);border-radius:20px;transition:all 0.2s;cursor:pointer;background:none;font-family:'Roboto Condensed',sans-serif;}
+.mkt-back-link:hover{border-color:var(--accent);color:var(--accent);}
+</style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="pl-inner">
+    <div class="pl-spinner"></div>
+    <div class="pl-text">Loading Shop…</div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo" onclick="return goHome(event)"><img src="data:image/png;base64,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" alt="T.E.S.T" style="height:42px;width:auto;"></a>
+    <div class="nav-links">
+      <a onclick="goHome(event,'departments')" style="color:var(--text2);text-decoration:none;font-size:0.9rem;font-weight:500;padding:0.4rem 0.8rem;border-radius:7px;cursor:pointer;">Browse by University</a>
+      <a onclick="goHome(event,'resources')" style="color:var(--text2);text-decoration:none;font-size:0.9rem;font-weight:500;padding:0.4rem 0.8rem;border-radius:7px;cursor:pointer;">What T.E.S.T Offers</a>
+    </div>
+    <div class="nav-right" id="nav-right">
+      <button class="btn-ghost" onclick="goHome(event,'top')">← Back to Home</button>
+    </div>
+  </div>
+</nav>
+
+<!-- MARKETPLACE HERO -->
+<section class="mkt-hero">
+  <a class="mkt-back-link" onclick="goHome(event,'top')">← Back to T.E.S.T Home</a>
+  <div class="mkt-hero-icon">🛒</div>
+  <h1 style="font-size:clamp(1.6rem,4vw,2.6rem);">T.E.S.T <span class="line3">Shop</span></h1>
+  <p class="hero-sub">Buy and sell daily-use engineering essentials — drafting tools, lab coats, calculators, stationery, and more — right from your student community.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- T.E.S.T MART APP -->
+<section class="section mart-section" id="marketplace">
+  <div class="mart-wrap">
+
+    <div class="mart-crumbs" id="mart-crumbs"></div>
+
+    <!-- ═══ HOME: department selection ═══ -->
+    <div class="mart-view active" id="mart-view-home">
+      <div class="mart-h1">Shop by Department</div>
+      <p class="mart-sub">We're rolling out T.E.S.T Mart one department at a time. EEE equipment is live now — pick it to start browsing.</p>
+      <div class="mart-dept-grid" id="mart-dept-grid"></div>
+    </div>
+
+    <!-- ═══ BROWSE: category + product grid ═══ -->
+    <div class="mart-view" id="mart-view-browse">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:240px;">
+          <div class="mart-h1" id="mart-browse-title">EEE Project Equipment</div>
+          <p class="mart-sub" id="mart-browse-sub">Development boards, sensors, modules and tools for lab work and projects — priced and stocked by T.E.S.T, so what you see is what you get.</p>
+        </div>
+        <button class="btn-primary" id="mart-add-product-btn" style="display:none;white-space:nowrap;" onclick="martOpenEditModal(null)">+ Add Product</button>
+      </div>
+      <div class="mart-section-tabs" id="mart-section-tabs"></div>
+      <div class="search-box" style="margin-bottom:1.25rem;max-width:100%;">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="mart-search" placeholder="Search products (e.g. Arduino, sensor, breadboard)…" oninput="martRenderGrid()"/>
+      </div>
+      <div class="mart-chip-row" id="mart-chip-row"></div>
+      <div class="mart-grid" id="mart-grid"></div>
+    </div>
+
+    <!-- ═══ PRODUCT DETAIL ═══ -->
+    <div class="mart-view" id="mart-view-product">
+      <div id="mart-product-detail"></div>
+    </div>
+
+    <!-- ═══ CART ═══ -->
+    <div class="mart-view" id="mart-view-cart">
+      <div class="mart-h1">Your Cart</div>
+      <p class="mart-sub">Review your items — quantities and totals update automatically.</p>
+      <div id="mart-cart-items"></div>
+      <div id="mart-cart-summary"></div>
+    </div>
+
+    <!-- ═══ CHECKOUT: student info ═══ -->
+    <div class="mart-view" id="mart-view-checkout">
+      <div class="mart-h1">Student Information</div>
+      <p class="mart-sub">We use this to confirm your order and get it to you — never to change your price.</p>
+      <form id="mart-checkout-form" onsubmit="return martSubmitCheckout(event)">
+        <div class="mart-form-grid">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input class="form-input" id="cf-name" required placeholder="Md. Mosiur Rahman"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Department *</label>
+            <select class="form-select" id="cf-dept" required>
+              <option value="">Select department</option>
+              <option>EEE</option><option>CSE</option><option>IPE</option><option>Mechanical</option>
+              <option>Civil</option><option>MME</option><option>WRE</option><option>Architecture</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Batch *</label>
+            <input class="form-input" id="cf-batch" required placeholder="e.g. 21 / 2022"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Student ID *</label>
+            <input class="form-input" id="cf-id" required placeholder="e.g. 2108090"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input class="form-input" id="cf-phone" required placeholder="01XXXXXXXXX"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" id="cf-email" type="email" placeholder="optional"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Receiving Place *</label>
+            <select class="form-select" id="cf-place" required onchange="martTogglePlaceDetail()">
+              <option value="">Select receiving place</option>
+              <option>BUET Campus</option><option>Dhaka University</option><option>Other University</option>
+              <option>Home Delivery</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group" id="cf-place-detail-wrap" style="display:none;">
+            <label class="form-label" id="cf-place-detail-label">Preferred location</label>
+            <input class="form-input" id="cf-place-detail" placeholder="e.g. Cafeteria, TSC, Hall, Department"/>
+          </div>
+        </div>
+        <button class="btn-primary" type="submit" style="margin-top:0.5rem;">Continue to Order Summary</button>
+      </form>
+    </div>
+
+    <!-- ═══ ORDER SUMMARY ═══ -->
+    <div class="mart-view" id="mart-view-summary">
+      <div class="mart-h1">Order Summary</div>
+      <p class="mart-sub">Check everything below, then confirm to get your bKash payment details.</p>
+      <div id="mart-summary-body"></div>
+      <button class="btn-primary" style="margin-top:1rem;" onclick="martConfirmOrder()">Confirm Order</button>
+    </div>
+
+    <!-- ═══ PAYMENT INSTRUCTIONS ═══ -->
+    <div class="mart-view" id="mart-view-payment">
+      <div class="mart-h1">Payment Instructions</div>
+      <p class="mart-sub">Send the exact amount below via bKash, then submit your transaction ID to confirm.</p>
+      <div class="mart-pay-box" id="mart-pay-box"></div>
+      <button class="btn-primary" style="margin-top:1.5rem;" onclick="martGo('payconfirm')">I've Paid — Enter Transaction ID</button>
+    </div>
+
+    <!-- ═══ PAYMENT CONFIRMATION FORM ═══ -->
+    <div class="mart-view" id="mart-view-payconfirm">
+      <div class="mart-h1">Enter Payment Information</div>
+      <p class="mart-sub">This lets us match your payment to your order and verify it quickly.</p>
+      <form id="mart-pay-form" onsubmit="return martSubmitPayment(event)">
+        <div class="mart-form-grid">
+          <div class="form-group">
+            <label class="form-label">Your bKash Number *</label>
+            <input class="form-input" id="pf-number" required placeholder="01XXXXXXXXX"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Transaction ID *</label>
+            <input class="form-input" id="pf-txn" required placeholder="e.g. 8N7A2K9XQ1"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Payment Amount *</label>
+            <input class="form-input" id="pf-amount" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Payment Method *</label>
+            <select class="form-select" id="pf-method" required>
+              <option>bKash — Send Money</option>
+              <option>bKash — Payment</option>
+            </select>
+          </div>
+        </div>
+        <label class="mart-check-row">
+          <input type="checkbox" id="pf-confirm" required/> I have completed the payment.
+        </label>
+        <button class="btn-primary" type="submit">Submit Order</button>
+      </form>
+    </div>
+
+    <!-- ═══ DONE ═══ -->
+    <div class="mart-view" id="mart-view-done">
+      <div class="mart-done">
+        <div class="mart-done-icon">🎉</div>
+        <div style="font-weight:700;font-size:1.1rem;color:var(--text);">Order Received!</div>
+        <div class="mart-done-id" id="mart-done-id"></div>
+        <div id="mart-done-amount" style="color:var(--text2);font-size:0.92rem;"></div>
+        <div class="mart-status-pill">⏳ Verification Pending</div>
+        <p style="color:var(--text2);font-size:0.88rem;line-height:1.6;margin-top:1.25rem;">We've received your order and payment details. You'll get a confirmation once your payment is verified.</p>
+        <button class="btn-outline btn-lg" style="margin-top:1.5rem;width:100%;background:#25D366;border-color:#25D366;color:#fff;" onclick="martShareWhatsApp()">📲 Share Order via WhatsApp</button>
+        <button class="btn-primary" style="margin-top:0.75rem;" onclick="martResetToHome()">Back to T.E.S.T Mart</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<button class="mart-cart-fab" id="mart-cart-fab" onclick="martGo('cart')">
+  🛒<span class="mart-cart-badge zero" id="mart-cart-badge">0</span>
+</button>
+
+<!-- Admin sign-in trigger -->
+<button class="mart-admin-fab" id="mart-admin-fab" onclick="martOpenAdminModal()" title="Admin sign in">🔐 <span id="mart-admin-fab-label">Admin</span></button>
+
+<!-- Admin sign-in modal -->
+<div class="mart-modal-backdrop" id="mart-admin-modal" onclick="if(event.target===this) martCloseAdminModal()">
+  <div class="mart-modal">
+    <div id="mart-admin-signed-out">
+      <div class="mart-h1" style="font-size:1.15rem;margin-bottom:0.25rem;">Admin Sign In</div>
+      <p class="mart-sub" style="margin-bottom:1.25rem;">Only the T.E.S.T Mart admin account can upload product photos. Everyone else can browse and order as normal.</p>
+      <form onsubmit="return martAdminSignIn(event)">
+        <div class="form-group">
+          <label class="form-label">Admin Email</label>
+          <input class="form-input" id="admin-email" type="email" required placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" id="admin-password" type="password" required placeholder="••••••••"/>
+        </div>
+        <div id="mart-admin-error" style="color:#ef4444;font-size:0.82rem;margin-bottom:0.75rem;display:none;"></div>
+        <div style="display:flex;gap:0.6rem;">
+          <button class="btn-primary" type="submit" style="flex:1;">Sign In</button>
+          <button class="btn-ghost" type="button" onclick="martCloseAdminModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div id="mart-admin-signed-in" style="display:none;">
+      <div class="mart-h1" style="font-size:1.15rem;margin-bottom:0.25rem;">Signed in as Admin</div>
+      <p class="mart-sub" id="mart-admin-whoami" style="margin-bottom:1.25rem;"></p>
+      <p style="font-size:0.85rem;color:var(--text2);margin-bottom:1.25rem;">You can now edit any product's name, category, price, stock, description and photo — or add and remove products entirely.</p>
+      <div style="display:flex;gap:0.6rem;">
+        <button class="btn-ghost" style="flex:1;" onclick="martCloseAdminModal()">Close</button>
+        <button class="btn-outline" onclick="martAdminSignOut()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add / Edit product modal (admin only) -->
+<div class="mart-modal-backdrop" id="mart-edit-modal" onclick="if(event.target===this) martCloseEditModal()">
+  <div class="mart-modal mart-modal-wide">
+    <div class="mart-h1" style="font-size:1.15rem;margin-bottom:0.25rem;" id="mart-edit-title">Edit Product</div>
+    <p class="mart-sub" style="margin-bottom:1.1rem;">Changes go live for every visitor as soon as you save.</p>
+    <form onsubmit="return martSaveProduct(event)">
+      <div class="form-group">
+        <label class="form-label">Product Photo</label>
+        <div class="mart-paste-zone" id="mart-paste-zone" tabindex="0" onclick="document.getElementById('mart-edit-file-input').click()">
+          <div id="mart-paste-preview" class="mart-paste-preview"></div>
+          <div class="mart-paste-hint" id="mart-paste-hint">Click here, then paste an image (Ctrl+V) — or click to browse a file</div>
+        </div>
+        <input type="file" id="mart-edit-file-input" accept="image/*" style="display:none;" onchange="if(this.files[0]) martHandleImageFile(this.files[0])"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Product Name *</label>
+        <input class="form-input" id="ef-name" required placeholder="e.g. Arduino UNO R3"/>
+      </div>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <div class="form-group" style="flex:1;min-width:150px;">
+          <label class="form-label">Section *</label>
+          <select class="form-select" id="ef-section" required onchange="martRepopulateCatOptions()"></select>
+        </div>
+        <div class="form-group" style="flex:1;min-width:150px;">
+          <label class="form-label">Category *</label>
+          <select class="form-select" id="ef-cat" required></select>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <div class="form-group" style="flex:1;min-width:100px;">
+          <label class="form-label">Price (৳) *</label>
+          <input class="form-input" id="ef-price" type="number" min="0" required/>
+        </div>
+        <div class="form-group" style="flex:1;min-width:100px;">
+          <label class="form-label">Stock *</label>
+          <input class="form-input" id="ef-stock" type="number" min="0" required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Short Description</label>
+        <textarea class="form-input" id="ef-desc" rows="2" placeholder="One or two sentences shown on the product page"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Specifications (one per line)</label>
+        <textarea class="form-input" id="ef-specs" rows="3" placeholder="ATmega328P microcontroller
+14 digital I/O, 6 analog in"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Suitable For (one per line)</label>
+        <textarea class="form-input" id="ef-suitable" rows="2" placeholder="Microcontroller Lab
+Robotics"></textarea>
+      </div>
+      <div id="mart-edit-error" style="color:#ef4444;font-size:0.82rem;margin-bottom:0.75rem;display:none;"></div>
+      <div style="display:flex;gap:0.6rem;">
+        <button class="btn-primary" type="submit" style="flex:1;">Save Changes</button>
+        <button class="btn-ghost" type="button" onclick="martCloseEditModal()">Cancel</button>
+      </div>
+      <button class="btn-outline" type="button" id="mart-edit-delete-btn" style="width:100%;margin-top:0.6rem;color:#ef4444;border-color:#ef4444;" onclick="martDeleteProduct()">Delete Product</button>
+    </form>
+  </div>
+</div>
+
+<div class="mart-toast" id="mart-toast"></div>
+
+<div class="divider"></div>
+
+<footer>
+  <div class="footer-top">
+
+    <div class="footer-brand-col">
+      <a href="index.html" onclick="return goHome(event)"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCACqAUsDASIAAhEBAxEB/8QAHQABAAIDAQEBAQAAAAAAAAAAAAcIBQYJBAEDAv/EAFwQAAEDAwICAQoPCgsFCQEAAAECAwQABQYHERIhMQgTFBciN0FRdbMJGDJWWGFncZalprTS0+MVFjY4QlJ2gZGUIyQzU1Vic3STobJDgpKVsTQ1RFRloqOkxNH/xAAbAQEAAwEBAQEAAAAAAAAAAAAABAUGAwIHAf/EADURAQABAwIBCQUHBQAAAAAAAAABAgMEBRFxBhITITEzQVHRFWGBkbEUIlJTocHwFjJCkuH/2gAMAwEAAhEDEQA/ALl0pSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpSgUpXN/UnqhtY4eoeRwoWayYsWNdJLLDLcZnhbbQ6pKUjdG/IADcknx0HSClcv/AEx+tnr+nfu7H0KemP1s9f0793Y+hQdQKVy/9MfrZ6/p37ux9CrBdQ5q1qFnmoV7s2XZG7dobNpMlpDrLaShwOtp3BSkHoWeXvUFvqUpQKUql+pmsGo8DUTI7fByd+NEiXORHYaQy3shCHFJSOad+gDnVjp2m3M+uabcxG3mh5mbRiUxVXEzv5LoUqh3br1R9d8v/Ca+jTt16o+u+X/hNfRq2/pXK/HT+vor/b9j8M/p6r40qh3br1R9d8v/AAmvo1LXUsaj5plefzrTkN8duERNsW+lDjSBwrS42AQUpB6FK5VwyuTuRjWartVUTEcfR1sazZvXItxTO88PVZelKVn1uUpWCzfJ4OKWRVxmAuKJ4GWUnZTq/F7Q8JPg/wAq/KqopjeXK9eosW5uXJ2iO2WdpVcbvqvmE19So8xmA0TybYZSdh76gTWO7Y2a/wBPyP8AgR9Gok5tvylla+WeDTO1NNU/CPVZ+lVni6m5tHcCvu0p0eFLjDagf/bvUtaXaiNZWpVunstxbm2jjAQTwPJHSU78wR4Rz8fj2928qi5Oydp/KbCzrsWqd6ap7N/H5TLfqUpUloSlKqJ1curOoOB55YrRiORO2mI9a+yXUtMtqK3C6tO5Kkk9CRy9+gt3SuX/AKY/Wz1/Tv3dj6FPTH62ev6d+7sfQoOoFK5f+mP1s9f0793Y+hWd086ofWSXn2PxJmbSpMaRc47LzLkZgpcQpxKVJOyN+YJHLY+Kg6R0pSgUpUPZjq/exjN3vGEYLdbvbYiXEN3twoEQlBIW6lsK6660jZRJSnnwnY7c6CYaVFlr04evdpi3l7VnO5sqYyiSibBuQjR1hSQoKbjpR1sIIIIBCuXhrDIl6rS84XpY9kUFhuPDTc3smYYSJrsJbim0NBkjraHypCwXACnhAISDyITZSogy7DH8HxS4ZVC1UzWNItcdUlTt1ndnx3eEb8LjCk7EK9Ts3wnny5168a1VvSWLIrOtPrzi7d0UzHTOW407HTIc2CUrCVdcaClHYFaeRIB8dBKlKUoFKUoFc/dQupW1duee5Bc7dbrZIhzLlIkMOdnoTxIW4pSSQdiDsRyroFSg5Xar6K57phaodzy2DEjxpj5YZLMtDpK+Eq2IT0cgajir2+iS97fGPLCvMrqiVBNmP9S7q7fLDb73b7Vblw7hFblR1KuDaSW3EhSSQTyOxHKrBdRnodnumWdXi+ZbFhRo0i2GIylmUl1Sll1C9+56AAg9PjFT5or3m8J/R6B83brbqBSlKBXPPVrvqZb5bmefXXQyueerXfUy3y3M8+utXyU765wj6qDX+7o4vwwPDr9m94dtOOxW5MtqOqQtK3UtgICkpJ3UQOlSeVbv6XrVL+hYv7+19Ks31FXfVuPkR3z7FXBqbrGuZGHkzatxG20dsT6o2naXZybPSVzO/wDPcpH6XrVL+hYv7+19KpT6mbSjMsJzmbecjhx4sZduXHRwSEOKUtTjauhJOw2Qen2qsTSqTJ5Q5WRaqtVRG0+6fVZ2dHsWbkXKZneP55FKUqiWpUF9UjLcXkdsglR621ELoHtrWQf9AqdKgLqjfw2heTUeccqLl91LNcrapjTaojxmPqjRIKlBKQSSdgB0mt2Y0qzV1lLv3Nab4hvwrkICh7435VrGMgHJLYCNwZjX+sVbmomNYpuxM1Mlyb0PH1Om5Vemfu7bbe/4SqHfLTcLJcnLdc4yo8lvYqSSDyPQQRyI96sjp3LchZ1ZX21FJ7NbbUR+atQSr/Imtp6ogAZ0xsOmA3v/AMa60zD/AMLbP/f2POJrlVTzLu0eEqm/jxhal0VE/wBtUbfNbWlKVdPtBVV+rN0PzzU3NbLe8SjQpMeNbuxXkvSktKSoOLVv3XSCF+DxVailBzUvvUuavWWxz7zPtNuREgRnJT6k3BtRDbaSpRAB58geVQlXW7WPvRZl5BnfN11yRoJG0o0WzzU+1zLliUGJIjw3gw8XpSGiFlPENgrp5GpOwLqVdXbdnFiuNwt1rjxIlxjvvufdBCuFCHEqUdhuSdgeVSt6Gz3vsp8qo80KtdQK+OLQ2hTjikoQkEqUo7AAeE19qGeqNzOxG0feSLlJW4/NijIG4DDzrkS2FYU+pxTaSGwWxsdyDwqJANBkWr7mOpct1WE3NGN4gytTYvioqX5NyUDsrsZC+4S0DuOuKB4j6kct61O9r1D0006hafs2yyzLXIfTZYGSPTVITGafUpDSpEcI3Ck8QTuFFJOxO3RU62JVsVZYRsqoqrZ2OjsMxiC11rhHBwbcuHbbbbwVgNYI+PytMMij5TKREs64LnZEhXMs8t0rSPCsK4SkdJUBtQZfELM1juJ2fH2XVPNWyCxDQ4obFaWm0oBPv8NabE/GZuX6GxPnsmsfppqXcFWnF7TnmMX+xXS4sMx258xlHY0uT1vfh4krJQteyiErSnfo6eVZCJ+Mzcv0NifPZNBsepuMfflgV3xoSuxHJrHC0/w8QbcSoKQojwgKSnceEb1FceTqDrbgsWC5bbVjNnclpcevTMwylSjGf3SuMypCeFKnWgQXD6nwHesnq/qDcLlgOTxsHsl3nx46HIc2+soQmPFSDwSFtBSg48ptPH/JpIBHquVSdhjFli4jaI2OONOWdqE0iCtpQUlTIQAgg+HcbHeg0SPleZYNdY8DUgQbnY5bqI8bJbewWUtOqVwpTLZKj1viJADiTwAkA7b71KNYHUROPOYNeWssfjR7I5EW3MdkHuEIUNt/f3I22577bc9q0PqeNRLfe8QsOMXi4Sm8qYgAOsTozrLklDZ4Q6hTiQHd0hKjwknnudqCWqUpQKUpQVU9El72+MeWFeZXVEqvb6JL3t8Y8sK8yuqJUHWrRXvN4T+j0D5u3W3VqOivebwn9HoHzdutuoFKUoFc89Wu+plvluZ59ddDK556td9TLfLczz661fJTvrnCPqoNf7ujikjqMHWmdUrip1xDaTZXRupQA368xVvOzoX/AJyP/iD/APtc1KVb6loEZ1/pek26vLf91dhatOLa6Pmb/H/jpaiXEWsIRKYUo9ADgJNftXNiyLW3eYLjailaZDZSoHYg8Q510nrK6vpPs6aI5/O52/ht2be+fNfadqH2yKvu7bbeJSlKp1kVAXVG/htC8mo845U+1B3VFWu4Lv8ACuzcV1cMQwyp1KSUoUFrOxPg5KHT7dRsuN7Us1ysoqq02rmxvtMIzsb7UW9wZLyuFpmS24s7b7JCgTVqbHkVjvaAq1XSLKO2/Aleyx76T3Q/WKqVX1ClIWFoUUqSdwQdiDUCxkTa8GF0XXa9L50RRFUVdvhPV/PJa2/4nj1+lIlXe1tSnkI4ErKlJITuTtyI8JP7a8kHAcQgzGZkWyMofZWHG1cazwqB3B2J2qC7BqRl1n4UIuapjKf9lLHXR+090P1GpMwrVyHeLjGtd0tyoUmQsNtutr421LJ2AIPNO55eGplF+zXPXHW2OHrej5tyJroimuZ/ypjt4+uyTqUpUxrilKUGq6x96LMvIM75uuuSNdbtY+9FmXkGd83XXJGgvV6Gz3vsp8qo80KtdVUfQ2e99lPlVHmhVrqD+XFobbU44tKEIBUpSjsAB0kmoF0zzF2wIytdvwrJMmg3fIJk613a2wgtm4hxQ5KWojgSg9wHD3Ckp3ST0VvOsTjt3nY3p62stM5LKdFxcB59gx0Bx9sf2m6GyfEtVSBHZZjsNx47SGWWkhDbaEhKUJA2AAHIADwUEM6baGY81h8RWYWuU3e33HpElmHe5bTLHXHVrS0lLTqUdwlSU7pGxIJ5181R0r0nsOA3S6TYj1scYZ3i3Ay35MhmR/si2HHCVr4+EBPh6PDvUwXe4wbRa5V0ucpqJCitKdffdVsltCRuSTUdYhbJ+oGRxNQMniOxbTDUV4xaH07FAI2E19P88oeoSf5NJ/OJIDEwmNTdQIGMW7LcSjY1Ggy4V0uM5c9DrklxhQcS20ygbtlS0p4uMjhHEBxdNZ+J+Mzcv0NifPZNSNUcxPxmLn+hsP57JoNUeXqjphgd0xywYUzk0OC3JctVzjTkJWhtaluAPR190taOI8kFXHsOQJNejTPRvSadgNlmWxuTdmXYqVfdBi6SmOvrPq1cDbqQg8XFunYcJ5eCppqK8hhStLr/AC8xscZ1/Erg6XshtjKSow3D0z2UDwfzqB0gcQ3INBis+0dgW+2wLxhkG6XC4Wm5xrh9zJd8kOtTG2nApTQDzikBW3NJPhSPHWNzjPBc83wKdecSyHErRbbwp6Vd7zES0htxUdxtDAKFK2StSwCtRCeQ51OsCXFuEFidBkNSYshtLrLzSgpDiFDcKBHIgg771+N7tkC9WiXabpFblwZbSmX2XBulaFDYg0HsBBG4O4NKjnQOROi45dMOuUpcuTidzctKJDh7t6OEocjrV7fW3Ep/3KkagUpSgqp6JL3t8Y8sK8yuqJVe30SXvb4x5YV5ldUSoOtWivebwn9HoHzduturUdFe83hP6PQPm7dbdQKUpQK556td9TLfLczz666GVzz1a76mW+W5nn11q+SnfXOEfVQa/wB3RxZXRDT9vUfLJNjdui7almCuV11LHXSeFbaeHbiH5+++/gqZfSpxPXs//wAuH1lah1FXfVuPkR3zzFXBrprmq5eNlzbtV7RtHhH7w8aXgY9/H59yned581dLd1LUCNcI8l3MZLqGnUrUhMAJKgDvtvxnb39jVi6UrN5edkZcxN6rfbs7P2XWPiWcffoo23KUpURIKEAjY8xSok1pzTI8dyWLAs85MZlcNLy/4FCyVFax0qB8CRXO5ci3TzpQdR1C1p9ib12JmOzq7ev5N0v+A4peuJUq0stPK/20f+CXv4+55H9YNR5kGij6OJyxXZDg8DMtPCf+NPI/sFYHH9TczkX63sSLqh1l2S2hxBjNAKSVAEbhIPh8FWIrhTFrIiZ2UONa0nXqaq6bW0x2zttPXwnr+KpGR2K549cjb7tG6xI4AsALCgpJJAIIPtGv6w/8LbP/AH9jzia3TqiPw6j+T2/9blaXh/4W2f8Av7HnE1X1UxRc5sebB5WNRi6jNmjspq26+K2tKUq7faClKUGq6x96LMvIM75uuuSNdbtY+9FmXkGd83XXJGgvV6Gz3vsp8qo80KtdVUfQ2e99lPlVHmhVrqCM9aVOWHIMN1CWFKt1hmvR7psCetRJaA2p47eBC0tqPtbnwVJJeZDHZBdQGeHj65xDh4dt99+jbbw148j4fveuXHBRcEdiO8URaOJL44D/AAZGx3Cujb26rOxgOPI6lqXlis0yBkSbG5NXGj3hxFvQ8pJUIoY4uEpCyGeA8ztt00Epwml6uXxq6S0KGAW18LgR1jle5CFcpDg8MdCh3CT6sjiPIJFSbcJkS3wnp0+UxEisIK3X33AhttI6SpR5Ae2ajW1Ttapdrhog4pg2PNJjtpCJVwff4O5HJLbTaQkD83i5dG9YDVPFdRnsXTdckyS3ZLarbMYuNxx+DaBGTKYZcC1oStTiysgJ4uFXJW23TtQSbiueYblUtyJjuS2y5SWkdcUyw+Cvg/OCekp9scuda5E/GYuf6Gw/nsmtPvc63azZNijuCpv1viWp5yTIyiPEVDLTCmVo7HYW6juytSkbgJKQE715o2nby9e59rXqFnRKMXiyOyxcW0yFbypCetlSWgOAcO4G3So86CWMl1CwfGrmLZfsqtNum8IWph+SlK0JPQpQ/JB8Z2FbGy6zJjoeZcbeZdQFIWghSVpI3BBHIgioLxi/2jR2Bk1qzuBfnVyrs/IZuq4Lk0XdlwgMpU8hJT10J2bKF8PMcuRr2aTYrq1ZsDtYh5Jaba0UuONWK62ZTvYba3FLQ0XW3Uq3SlSRsR3PR4KDLlK9ILyXEcR08uMjdadtxYZC1eqHiirUeY6G1HfkknaTpcyLEgPT5UhpmIy0p515agEIQBuVE9AAA33qMs3uurlrw+8vScTw2/NIgPlaGJ76SoBtRO7C2iHB/U4xxdG433qM8j04sln0Qx3J15Re8j7DTAeRAnXJx6DcErWgdjIYB4QkhWyUp324Ug789wlrQZD8+z37MpDC2BlF5duMRDiSlYiBCGY5UD0FSGgv3lipGr42hDaEoQlKUJACUpGwA8Qr7QKUpQVU9El72+MeWFeZXVEqvb6JL3t8Y8sK8yuqJUHWrRXvN4T+j0D5u3W3VqOivebwn9HoHzdutuoNU1G1GwvTuJElZlfmbS1MWpEfjaccU4UgFWyUJUeW43O23MVqFv6pHROfOYhRs6jl59wNthcKS2kqJ2G6lNgD3yQKg70TT1Gn/v3L/wDLVO7Z/wB5Rf7ZH+oUHY+ueerXfUy3y3M8+uuhlc89Wu+plvluZ59davkp31zhH1UGv93Rxbh1LuWY/h2oE26ZJcBAiOWtxhDhaW5u4XWlAbIBPQlXtcqsl299KPXYj9xk/V1RalX2doWPm3eluVTE+7b0VOLqt7Gt9HREbe/f1Xp7e+lHrsR+4yfq6z2F6kYVmVwdt+N31udKZa68trrDrZCAQCru0jfmR0eOufFTh1FvfWn+RnvPM1UZ/J3Gx8au7RVVvEeO3oscTWb169TbqiNp4+q2OU3+z4vYJd/v89qBbIaAuRIc34UAkAcgCTuSAAOZJqMPTOaG+vtr/l0v6qvz6tj8WPLveh/PGK5mVjWkdh8ZvlpyWwxL7YpzU62zG+uR5De/CtO+3h5jmCNjzG1Qp1RoP36QleA25A/+Rys/1G34tOH/ANjI+cu17tfMXlXa2Rr1b2VPPQQpLyEDdRaPPcDw8J/yJPgqPlUzVbnZn+U+PXf06uKI3mNp+Xag22SewrlFmcPF1h5DvD4+FQO3+VWNY1Swh1lLirwplShuULjO8SfaOySP2E1WqlVtq/Va32fO9K1vI0yKotRExV57+HCYbfq3kUHJsuM62laorTCWELUkpK9iSTseYG6vD4qw2GJKswsqU8ybgwB/iJrE1Ieh+MSrrlDF4dZUm3wF9c64RsFuD1KR49jsT4tvbFflPOu3N/GXPH6bUtQpq23qqq3nbj1/CFhqie59UforbbjIt8vOY6ZEZxTTqUQpLiQoHYgKS2Unn4QTUsVx2yL8ILj/AHp3/Wau32h1d041IwnUSPMfwy/M3ZEJSUyQlpxtTZVvw7pWlJ2PCdjttyNbZVLvQzf+2Z7/AGcD/rIq6NBqusfeizLyDO+brrkjXW7WPvRZl5BnfN11yRoL1ehs977KfKqPNCrXVVH0NnvfZT5VR5oVa6gVCUXCcMV1S9yjTMfic7LHu8FgoIYVID7qHnw3vwFwbtbkjcHY9J3M21pGp+KXW7P2rJsUlsQ8osa1qhl/frEtpYHXYzu3PgXwp2V0pIBFBu9aHr5cJMPS65wbevhuN5U1Z4W3T12UsMgj2wFqV/u1jmNXmojKmcnwfMLHc2wQqOLU7MZWR/NvsJUlafb5e9UfN2RzLdHG9XMhzy5s3+O0q8wlolBNvtj7fFwMpjndB2/k1cW6ySRvudqCwdmt8a02iFaoSOCLCjtx2U/moQkJSP2AVosT8Ze5/obD+eya23CLnMveGWS83CJ2HMn29iS/H2I60tbaVKTz58iSOdafEda9M5c2euI64cNiEI4hvsJsjc7e1xJ/aPHQbPqXjqcs0/vuOHYLnwnGmlE7cDu27av1LCT+qvy0qyFWV6c2G/u7iRLhIMlJG3C+kcLqf1OJUP1V5tZ79dsY0syK/WNtK7jChKcZKkcQb5gFwjwhAJVt/VqJ8jx9nSbBbPmuJZzeprpnxlPxXZhkRL32S8Ou9bYHchagtbiS2N9knpPOgsPUK4rhuIxOqRvLVpsUZMe2WaNMLYSVNRJ7zzxK0JJKW1qbSg9yByHtmtgf1SmXP+KYbgOV3aa5ybdnW9duhp/rLeeCTsPElKifFWb0wxKTjNtmTL1OTcskvD4l3iakEIcd4QlLbYPQ02kBCR4hvy3oNvpSlApSlBrGo2AYhqJZ2bTmVmRdIbDwfaQXnGihYBG4U2pKugnlvtWgjqXNCQd/vF+Npv11ZjNcz1ZtWTzIGNaLffHamuDse5ffRFidf3Qkq/glpKk7KKk8+nh38NYbtia7ex0+WsL6NBL1rgxLXbIttgMJjw4jKGGGk9DbaEhKUj2gABXoqGe2Jrt7HT5awvo07Ymu3sdPlrC+jQbzqVpthOo8OJEzSxN3VqGtS4+77rSmyoAK2U2pJ2Ow3G+3IVp1u6mfRCBPYnRsGbD7DgcbLlxluJCgdxulTpSfeIIrz9sTXb2Ony1hfRp2xNdvY6fLWF9Ggmao/vei+md6u8q7XLGUvTJbqnn3EzJCONajuVcKVgAk8+QrWe2Jrt7HT5awvo07Ymu3sdPlrC+jXW1fu2Z3t1TTwnZzuWrd2Nq6Ynj1sz2hNJvWp8YSvrKdoTSb1qfGEr6ysN2xNdvY6fLWF9GnbE129jp8tYX0a7+0cz82r/afVy+x4/5dPyhme0JpN61PjCV9ZWfwnTTCMLuL1xxqxpgynmiyt3sh10lBIJT3albcwOjxVo/bE129jp8tYX0adsTXb2Ony1hfRrzXnZNymaa7lUxPnMvVOLYonnU0RE8ISnleP2bKsemY/kEBufbJqAiRHWSAsAgjmCCCCAQQQQRUWelc0J9Y3xtN+up2xNdvY6fLWF9GnbE129jp8tYX0aiu6VMYsVoxiwQ7DYYLcG2wm+tx46CSEJ3J6SSTzJO5O53rJVDPbE129jp8tYX0adsTXb2Ony1hfRoJDu+DYldX1PzbHFU6o7qW3xNlR8Z4CNzXg7V2C/0H/wDbe+nWl9sTXb2Ony1hfRp2xNdvY6fLWF9GvE2qJ7YhCr03DrnnVWaZn30x6N5i6bYTGcDjdhZUR4HHXHB+xSiK2mOwzGYQxHZbZaQNkIbSEpSPEAOioXRrXk+PX62RtVtL38Gs1ydMdm8fdtmew2/y4UO9aSA2lXPulHwdGwUUzWlQUkKSQUkbgg8jX7TRTT2Q62MWxj91RFPCIj6MDZMzxm85Lc8at92acvNr2MyC4hbTzYPQrhWAVJ5juk7jmOfMVE2pGi3U3Y+zIyfM8eh21uVJ7t1VymNhx5Z34UNtucyeZ4Up6ATtsK23WjTJzLVw8pxaeLFnVmBVa7ogcljnvHfH5bStyNiDtueRBUFRpoUh/UvVW7ZFqu62jNMXd6zBxZTZQxakbJ/jSEknrqlnbZwEgdyd+aNvSQmPSrTrBMBtr5wawfclm5Bt1/jW8pxzYHg4uvKK07cR7k7bbnlW50pQee5Qotyt0m3TmEvxJTK2X2ldC0KBSpJ9ogkVER6lzQokn7xen/1Wb9dUy0oNX040+w/Tu0v2rDbMi1xJD3X3UB5x0rXsBuVOKUroA5b7VtFKUClKUCofzHRaA/mZy+wRrfKcXIEqVYrotwW+Q+CD15IRuG3TtzUUOJPhTuSamClBHj171bndchQsEsVof6Ez5t87Ijp9sNtthaz7R4PfFYntPSI6EZHByqSNQkvqku391rdEkqASY7jIO3Y3ClKQ2D3GwIO++8s0oI2Zv+r4ZNvnaa2GXI2KHJjWQhuG5/WCFNKcA/qkH36xelmi8DHMiGVXpEH7ooKlQrXbuuC3Wwq34lMpcJJcIOxXskczskVLtKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKDHZPYrRk1gmWG+wGZ9tmtlp9h0bpUn/qCDsQRzBAI5ioPxi+XjQbIomEZrOfuGn853rOO5A+d1W9R9TDlK8CQPUr6Nh+buG7A1jMpsFnyjH5lgv0BmfbZrZbfYdHJQ8Y8IIOxBHMEAjmKDJgggEEEHmCKjPWfTN7KXoeWYlPFizuzAqtlzSO5dTz3jvj8tpW5HMHbc9IJB0vFb9edCsjh4JnM56fgk53rOOZE+dzCP5MOUroAA9Svo2H5u4bsACCAQdweg0Ed6MamtZxHmWa8wDYszsxDV5szp7ppX863+e0rcEKG+24G53BVIlRjrRpk9lD8PL8QnpsWeWccVtuSRsl5Phjvj8tpW5HPfbc9IJB9WjGpzGcxplou8BVizKzq61ebM8e7aV0dcb/PaVyIUN9txzO4JCRKUpQKUpQKVGWtOuOCaTORIuSvzZFwloLrUGAylx7re5HGriUlKU7ggbkE7HbfY7Z/SnUbFdTca+72KTVvsIcLT7TqOB5hYG/CtPg5EEEEg+A0G3UpSgUpSgUpSgUqFtSuqZ0xwLMHMWub90nTo6giWqBGS43GV08K1KWncjluEhW3QeYIEr4vfbTk+Pwr/AGKa3Ots5oOx3299lpPtHmCDuCDzBBB5igyVKUoFKUoIyzXSD758nmXztoam2Tsrg/iNov8A2PEa4UJT3DfAeHfh4jz5kk+GsN2gvdq1m+FH2VTNSghntBe7VrN8KPsqdoL3atZvhR9lUzUoIZ7QXu1azfCj7KnaC92rWb4UfZVM1KCGe0F7tWs3wo+yp2gvdq1m+FH2VTNSghntBe7VrN8KPsqdoL3atZvhR9lUzUoIMvmhuT2+3LuGG60akrv0VSX4TV7vpkwnVpIUEPNhA4kq22O+458wRyrbtF9Tmc5jzLPeYBsWZ2Y9avNmdPdNK6Out7+raVyII323A3O4KpFqMNadMpGTyIeY4dOTY89swKrdcANkSE+GM+Pym1cxz323PSCQQk+lR3ovqdHzuJLtd1gqseYWdXWb1Znjstlf84j85pXIhQ36RzO4JkSgUpSgUpSgUpSgxeWY9Zsqx2Zj+QQGp9tmtlt9lwciPAQekEHYgjmCARzqFMRyC86HZJDwDPZ70/CZrgZxrI3zzin8mHKV0DYckr6Nh+buG5/rFZdjlly3HJmPZDAan22Y31t5lwcj4iD0hQOxBHMEAigyo5jcVHmp2kWO51fIGQOXS/47fYKFNN3WwzBElLaUObal8Kt09O3hG557Eg6LhuRXrRPJYenmoE92dh01fWcZyV8/yB/JhyldCSBySs8th4twifaCGe0F7tWs3wo+yp2gvdq1m+FH2VTNSghntBe7VrN8KPsqdoL3atZvhR9lUzUoKE9VT1POd2/JIl6xp7Ls9gPRktOvznzPnsOJJ7lXCkKLZBBBA5d1vty3mfqFtLMo08xa+3TK4y7fLvjjHWoDhBW020F7LWB6lSi4e56QEjfp2Fj613UXNMfwHFJWS5LNEaFHGyUjm484fUttp/KWfAPfJ2AJAfNSM2x/T/E5WS5JMEeIwOFCE83H3D6lptP5SztyHvk7AEiJMbwPULVFT+aZ3muaYM3NCfuVj+PXUxOxIw3KTI3SeJ1W+55AjoO3JKfbpxheQag5ZF1W1UhGMpg8eM405zbtjZ5h50H1T6tgeY7nl0EJCJxoIZ7QXu1azfCj7KnaC92rWb4UfZVM1KCGe0F7tWs3wo+yp2gvdq1m+FH2VTNSg5s6ydTzqfZ9S7jFtdiv2UQp0tb0S6JSZC30rJVxPuD1LnM8SlcIJ3I5EVd/qacIumnmjFixe9rQq5MJddkobXxJaU44pzgBHI8PEASORIO3KpHpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQRdrRplJyOXEzTCpyLHntnTvAnAbIlI8MaQPym1cxz34d/ESDrWP9U/p5Ht/YOoUqRiOUxFqj3K1vQJD3WnU8iUrbQoFB6Rz32/UTO1KCGfTR6E+vn4pm/U09NHoT6+fimb9TUzUoIZ9NHoT6+fimb9TT00ehPr5+KZv1NTNSgr7kvVC2nMbrZMJ0UvUO45Je5SmjMmwn22beyhBcW6UuIT1xXClXCkbjkd/ADk7DkOpOAap43h2oOTQcvteUofbg3Nq2ohPxpTSQsoWhB4ShQOwPTvt0bHfc9YdOUZ7CtcmDepOP5DZJJlWi6x0BxUdwjZQUg8loUAN07jfYeDcHCYdpdkSs8gZxqRmn303a1MuNWmPHgpixIZcHC44EAnjcUOW5229vZOwSvSlKDEZjjVky/G5mO5FAanW2Y3wPNLH7FA9KVA7EEcwQCKg6y5xcNALm3hWqNxlTcMWlX3uZKWVvLbQn/wkhKElRUkepUBzA8XqLEUoIZ9NHoT6+fimb9TT00ehPr5+KZv1NTNSghn00ehPr5+KZv1NPTR6E+vn4pm/U1M1KCFZXVUaGMxXXm8yckrQgqSy3apYW4QNwlPE0E7noG5A8ZFQ1h+smmOa56nUTVzLGoqrc6pOOYymBKfZtyQf5d1SGihx5WwO4JA5HwJCLn0oIZ9NHoT6+fimb9TT00ehPr5+KZv1NTNSghn00ehPr5+KZv1NRxr71WuPQsWYj6SXli53iS6UvSXoDyEw2wPVBLyEhSiTsOkDY7joq1tRzr3pFj+r+MR7TeJD8GXDdLsKcwkKWyojZQKTyUlQA3HLoB35UEH9Rz1QuYZ3m72F5u6xcXX4y5EOc3HQytKkc1IWlACSCncggAgjw78rbVC3U9dTxjWkVwlXlq5yb3epDRYEp5oNJZaJBKUIBOxJA3JJ6OW3PeaaBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKBSlKD//Z" alt="T.E.S.T" style="height:52px;width:auto;display:block;"></a>
+      <p class="footer-brand-tagline">Study smarter. Access faster. Learn together.</p>
+      <p class="footer-brand-desc">Open-access academic platform built for engineering students — making past questions, study resources, and simplified learning accessible anytime, anywhere.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://www.linkedin.com/in/md-mosiur-rahman-a2516521b/" target="_blank" rel="noopener noreferrer" class="footer-social-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="#" class="footer-social-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+        <a href="#" class="footer-social-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col-dark">
+      <h4>Product</h4>
+      <a onclick="goHome(event,'questions')">Previous Year Questions</a>
+      <a onclick="goHome(event,'resources')">Study Resources</a>
+      <a onclick="goHome(event,'departments')">University Coverage</a>
+      <a onclick="goHome(event)">T.E.S.T Shop</a>
+    </div>
+
+    <div class="footer-col-dark">
+      <h4>Company</h4>
+      <a onclick="goHome(event)">About Us</a>
+      <a onclick="goHome(event)">Contact</a>
+    </div>
+
+  </div>
+
+  <div class="footer-divider"></div>
+  <div class="footer-bottom">
+    <span>&#169; 2026 T.E.S.T &#8212; Technical Exam Support Toolkit. Built for students, by students.</span>
+    <span class="footer-bottom-tagline">Study smarter. Access faster. Learn together.</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.13.2/firebase-app-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.13.2/firebase-auth-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/10.13.2/firebase-firestore-compat.min.js"></script>
+
+<script>
+  // Fade the loader out once the page has rendered, just like a normal page load.
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      document.getElementById('page-loader').classList.add('hide');
+    }, 350);
+  });
+
+  // Navigate back to the main site with a matching loading transition.
+  function goHome(e, anchor){
+    if(e) e.preventDefault();
+    var loader = document.getElementById('page-loader');
+    loader.querySelector('.pl-text').textContent = 'Loading T.E.S.T…';
+    loader.classList.remove('hide');
+    var target = 'index.html' + (anchor ? ('#' + anchor) : '');
+    setTimeout(function(){ window.location.href = target; }, 300);
+    return false;
+  }
+</script>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   T.E.S.T MART — student-facing shop prototype
+   Cart math, order summary, order-ID generation and the bKash
+   payment flow are fully real. Product data (name, category,
+   price, stock, description, specs, photo) is backed by a real
+   Firebase project: only the signed-in admin account can add,
+   edit or delete products; everyone else can only view them.
+   Photos are pasted or browsed straight into the edit form,
+   resized/compressed in the browser, and stored inline — no
+   third-party image host required.
+   ══════════════════════════════════════════════════════════ */
+
+  // ---- Config ----
+  var FIREBASE_CONFIG = {
+    apiKey: "AIzaSyC7dnMYMIWmB6k_h3XMufO5Ib3Xh6-mhKc",
+    authDomain: "technical-exam-support-toolkit.firebaseapp.com",
+    projectId: "technical-exam-support-toolkit",
+    storageBucket: "technical-exam-support-toolkit.firebasestorage.app",
+    messagingSenderId: "728318103793",
+    appId: "1:728318103793:web:b0d449e576e96b4de11950",
+    measurementId: "G-7Z3WPHKE8H"
+  };
+  var ADMIN_EMAIL = "2108090@ipe.buet.ac.bd";
+  var BKASH_NUMBER = "01610029232";
+
+  firebase.initializeApp(FIREBASE_CONFIG);
+  var martAuth = firebase.auth();
+  var martDb = firebase.firestore();
+  var martIsAdmin = false;
+
+  // ---- Admin sign-in ----
+  function martOpenAdminModal(){
+    document.getElementById('mart-admin-modal').classList.add('show');
+  }
+  function martCloseAdminModal(){
+    document.getElementById('mart-admin-modal').classList.remove('show');
+    document.getElementById('mart-admin-error').style.display = 'none';
+  }
+  function martAdminSignIn(e){
+    e.preventDefault();
+    var email = document.getElementById('admin-email').value.trim();
+    var pw = document.getElementById('admin-password').value;
+    var errBox = document.getElementById('mart-admin-error');
+    errBox.style.display = 'none';
+    martAuth.signInWithEmailAndPassword(email, pw).then(function(cred){
+      if(cred.user.email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()){
+        martAuth.signOut();
+        errBox.textContent = 'This account is not authorized as T.E.S.T Mart admin.';
+        errBox.style.display = 'block';
+      }
+    }).catch(function(err){
+      errBox.textContent = err.message.replace(/^Firebase:\s*/,'');
+      errBox.style.display = 'block';
+    });
+    return false;
+  }
+  function martAdminSignOut(){ martAuth.signOut(); martCloseAdminModal(); }
+
+  martAuth.onAuthStateChanged(function(user){
+    martIsAdmin = !!(user && user.email && user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase());
+    var fab = document.getElementById('mart-admin-fab');
+    fab.classList.toggle('is-admin', martIsAdmin);
+    document.getElementById('mart-admin-fab-label').textContent = martIsAdmin ? 'Admin' : 'Admin';
+    document.getElementById('mart-admin-signed-out').style.display = martIsAdmin ? 'none' : 'block';
+    document.getElementById('mart-admin-signed-in').style.display = martIsAdmin ? 'block' : 'none';
+    if(martIsAdmin){ document.getElementById('mart-admin-whoami').textContent = 'Signed in as ' + user.email; }
+    var addBtn = document.getElementById('mart-add-product-btn');
+    if(addBtn) addBtn.style.display = martIsAdmin ? 'inline-flex' : 'none';
+    if(mart.view === 'browse') martRenderGrid();
+    if(mart.view === 'product') martRenderProductDetail(); // refresh edit control visibility
+  });
+
+  // ---- Product edits (name/category/price/stock/desc/specs/photo): live sync from
+  // Firestore, so every viewer sees the admin's latest changes ----
+  var martOverrides = {}; // id -> {name,cat,price,stock,desc,specs,suitable,photoUrl,deleted}
+  martDb.collection('products').onSnapshot(function(snap){
+    var next = {};
+    snap.forEach(function(doc){ next[doc.id] = doc.data(); });
+    martOverrides = next;
+    if(mart.view === 'browse') martRenderGrid();
+    if(mart.view === 'product') martRenderProductDetail();
+  }, function(err){
+    console.warn('Product sync unavailable (check Firestore rules):', err.message);
+  });
+
+  // Merge the hardcoded catalog with any admin overrides, drop deleted items,
+  // and append any brand-new products the admin has added.
+  function martEffectiveProducts(){
+    var list = MART_PRODUCTS.map(function(p){
+      var o = martOverrides[p.id];
+      return o ? Object.assign({}, p, o) : p;
+    }).filter(function(p){ return !p.deleted; });
+    Object.keys(martOverrides).forEach(function(id){
+      if(!MART_PRODUCTS.some(function(p){ return p.id === id; })){
+        var o = martOverrides[id];
+        if(o && !o.deleted) list.push(Object.assign({id:id, icon:'🛒'}, o));
+      }
+    });
+    return list;
+  }
+
+  // ---- Add / Edit product modal ----
+  var martEditingId = null;       // null while adding a brand-new product
+  var martEditPhotoDataUrl = null;
+
+  function martOpenEditModal(id){
+    if(!martIsAdmin){ martToast('Admin sign-in required'); return; }
+    martEditingId = id;
+    var p = id ? martProduct(id) : null;
+
+    document.getElementById('mart-edit-title').textContent = p ? 'Edit Product' : 'Add New Product';
+    document.getElementById('mart-edit-delete-btn').style.display = p ? 'block' : 'none';
+    var errBox = document.getElementById('mart-edit-error');
+    errBox.style.display = 'none';
+
+    var secSel = document.getElementById('ef-section');
+    secSel.innerHTML = MART_SECTIONS.map(function(s){ return '<option value="' + s.id + '">' + s.label + '</option>'; }).join('');
+    secSel.value = p ? (p.section || 'equipment') : mart.activeSection;
+    martRepopulateCatOptions(p ? p.cat : null);
+
+    document.getElementById('ef-name').value = p ? p.name : '';
+    document.getElementById('ef-price').value = p ? p.price : '';
+    document.getElementById('ef-stock').value = p ? p.stock : '';
+    document.getElementById('ef-desc').value = p && p.desc ? p.desc : '';
+    document.getElementById('ef-specs').value = p && p.specs ? p.specs.join('\n') : '';
+    document.getElementById('ef-suitable').value = p && p.suitable ? p.suitable.join('\n') : '';
+
+    martEditPhotoDataUrl = p && p.photoUrl ? p.photoUrl : null;
+    martRenderPastePreview(p ? (p.icon || '🛒') : '🛒');
+
+    document.getElementById('mart-edit-modal').classList.add('show');
+    setTimeout(function(){ document.getElementById('mart-paste-zone').focus(); }, 50);
+  }
+  function martRepopulateCatOptions(presetCat){
+    var section = document.getElementById('ef-section').value;
+    var cats = (MART_CATS_BY_SECTION[section] || []).filter(function(c){ return c !== 'All'; });
+    var catSel = document.getElementById('ef-cat');
+    catSel.innerHTML = cats.map(function(c){ return '<option value="' + c + '">' + c + '</option>'; }).join('');
+    if(presetCat && cats.indexOf(presetCat) > -1) catSel.value = presetCat;
+  }
+  function martCloseEditModal(){
+    document.getElementById('mart-edit-modal').classList.remove('show');
+  }
+
+  function martRenderPastePreview(fallbackIcon){
+    var box = document.getElementById('mart-paste-preview');
+    var hint = document.getElementById('mart-paste-hint');
+    if(martEditPhotoDataUrl){
+      box.innerHTML = '<img src="' + martEditPhotoDataUrl + '" alt="preview"/>';
+      hint.textContent = 'Click here to replace — paste (Ctrl+V) or browse a new image';
+    } else {
+      box.innerHTML = '<span style="font-size:2.2rem;">' + (fallbackIcon || '🛒') + '</span>';
+      hint.textContent = 'Click here, then paste an image (Ctrl+V) — or click to browse a file';
+    }
+  }
+
+  // Paste an image (e.g. copied from another website) straight into the edit form.
+  document.addEventListener('paste', function(e){
+    var modal = document.getElementById('mart-edit-modal');
+    if(!modal || !modal.classList.contains('show')) return;
+    var items = (e.clipboardData || window.clipboardData) ? (e.clipboardData || window.clipboardData).items : null;
+    if(!items) return;
+    for(var i = 0; i < items.length; i++){
+      if(items[i].type.indexOf('image') !== -1){
+        var file = items[i].getAsFile();
+        martHandleImageFile(file);
+        e.preventDefault();
+        break;
+      }
+    }
+  });
+
+  // Resize/compress any pasted or browsed image client-side before storing it,
+  // so it stays well within Firestore's per-document size limit.
+  function martHandleImageFile(file){
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      var img = new Image();
+      img.onload = function(){
+        var MAX = 640;
+        var scale = Math.min(1, MAX / Math.max(img.width, img.height));
+        var w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        martEditPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+        martRenderPastePreview();
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function martSaveProduct(e){
+    e.preventDefault();
+    if(!martIsAdmin){ martToast('Admin sign-in required'); return false; }
+    var errBox = document.getElementById('mart-edit-error');
+    errBox.style.display = 'none';
+
+    var name = document.getElementById('ef-name').value.trim();
+    var section = document.getElementById('ef-section').value;
+    var cat = document.getElementById('ef-cat').value;
+    var price = Number(document.getElementById('ef-price').value);
+    var stock = Number(document.getElementById('ef-stock').value);
+    var desc = document.getElementById('ef-desc').value.trim();
+    var specs = document.getElementById('ef-specs').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+    var suitable = document.getElementById('ef-suitable').value.split('\n').map(function(s){ return s.trim(); }).filter(Boolean);
+
+    if(!name || !section || !cat || isNaN(price) || isNaN(stock)){
+      errBox.textContent = 'Please fill in name, section, category, price and stock.';
+      errBox.style.display = 'block';
+      return false;
+    }
+
+    var data = {name:name, section:section, cat:cat, price:price, stock:stock, desc:desc, specs:specs, suitable:suitable, deleted:false};
+    if(martEditPhotoDataUrl) data.photoUrl = martEditPhotoDataUrl;
+
+    var id = martEditingId || ('custom_' + Date.now());
+    martDb.collection('products').doc(id).set(data, {merge:true})
+      .then(function(){
+        martToast('Product saved');
+        martCloseEditModal();
+        if(mart.view === 'product' && mart.currentProductId === id) martRenderProductDetail();
+        if(mart.view === 'browse') martRenderGrid();
+      })
+      .catch(function(err){
+        errBox.textContent = err.message;
+        errBox.style.display = 'block';
+      });
+    return false;
+  }
+
+  function martDeleteProduct(){
+    if(!martEditingId) return;
+    if(!confirm('Delete this product? This cannot be undone.')) return;
+    martDb.collection('products').doc(martEditingId).set({deleted:true}, {merge:true})
+      .then(function(){
+        martToast('Product deleted');
+        var deletedId = martEditingId;
+        martCloseEditModal();
+        if(mart.view === 'product' && mart.currentProductId === deletedId) martGo('browse');
+      })
+      .catch(function(err){ martToast('Delete failed: ' + err.message); });
+  }
+
+  // ---- Departments ----
+  var MART_DEPTS = [
+    {id:'EEE', name:'EEE', icon:'⚡', live:true},
+    {id:'CSE', name:'CSE', icon:'💻', live:false},
+    {id:'IPE', name:'IPE', icon:'⚙️', live:false},
+    {id:'MECH', name:'Mechanical', icon:'🔧', live:false},
+    {id:'CIVIL', name:'Civil', icon:'🏗️', live:false},
+    {id:'MME', name:'MME', icon:'🧪', live:false},
+    {id:'WRE', name:'WRE', icon:'💧', live:false},
+    {id:'ARCH', name:'Architecture', icon:'📐', live:false}
+  ];
+
+  // ---- EEE product catalog ----
+  var MART_PRODUCTS = [
+    {id:'p1',  name:'Arduino UNO R3',            cat:'Development Boards',   price:850, stock:25, icon:'🔌', section:'equipment',
+      desc:'The go-to microcontroller board for labs, robotics and academic projects. ATmega328P, USB, 14 digital I/O.',
+      specs:['ATmega328P microcontroller','14 digital I/O, 6 analog in','5V logic, USB-B powered/programmed'],
+      suitable:['Microcontroller Lab','Robotics','Academic Projects']},
+    {id:'p2',  name:'ESP32 DevKit V1',           cat:'Development Boards',   price:650, stock:18, icon:'📶', section:'equipment',
+      desc:'Dual-core Wi-Fi + Bluetooth board, ideal for IoT coursework and connected projects.',
+      specs:['Dual-core 240MHz, Wi-Fi + BLE','30 GPIO pins','Micro-USB, 3.3V logic'],
+      suitable:['IoT Projects','Thesis Work','Home Automation']},
+    {id:'p3',  name:'Arduino Nano (CH340)',       cat:'Development Boards',   price:450, stock:30, icon:'🔩', section:'equipment',
+      desc:'Breadboard-friendly compact board, same core as the UNO in a smaller footprint.',
+      specs:['ATmega328P, Mini-USB','8 analog inputs','Breadboard-compatible pinout'],
+      suitable:['Compact Builds','Sensor Projects']},
+    {id:'p4',  name:'HC-SR04 Ultrasonic Sensor',  cat:'Sensors',               price:120, stock:40, icon:'📡', section:'equipment',
+      desc:'Distance-measuring sensor commonly used in obstacle-avoidance and robotics labs.',
+      specs:['Range: 2cm – 400cm','5V operation','Trigger/Echo interface'],
+      suitable:['Obstacle Avoidance','Robotics Lab']},
+    {id:'p5',  name:'IR Obstacle Sensor',         cat:'Sensors',               price:80,  stock:35, icon:'👁️', section:'equipment',
+      desc:'Infrared proximity sensor with adjustable sensitivity, digital output.',
+      specs:['Adjustable detection range','Digital output','Onboard indicator LED'],
+      suitable:['Line Following Robots','Automation Projects']},
+    {id:'p6',  name:'PIR Motion Sensor (HC-SR501)',cat:'Sensors',              price:150, stock:22, icon:'🕵️', section:'equipment',
+      desc:'Passive infrared sensor for detecting human movement — a staple for security projects.',
+      specs:['Adjustable delay & sensitivity','Detection range ~7m','3.3–5V output'],
+      suitable:['Security Systems','Automation Projects']},
+    {id:'p7',  name:'L298N Motor Driver Module',  cat:'Modules',               price:180, stock:20, icon:'🎛️', section:'equipment',
+      desc:'Dual H-bridge driver for controlling DC or stepper motors from a microcontroller.',
+      specs:['Drives 2 DC motors or 1 stepper','5V–35V motor supply','Onboard heatsink'],
+      suitable:['Robotics','Motor Control Labs']},
+    {id:'p8',  name:'4-Channel Relay Module',     cat:'Modules',               price:220, stock:15, icon:'🔀', section:'equipment',
+      desc:'Opto-isolated relay board for switching mains-level loads from low-voltage logic.',
+      specs:['4× 10A/250VAC relays','Opto-isolated inputs','3.3–5V trigger'],
+      suitable:['Home Automation','Power Switching Projects']},
+    {id:'p9',  name:'Breadboard (830 Points)',    cat:'Tools',                 price:150, stock:50, icon:'🟦', section:'equipment',
+      desc:'Full-size solderless breadboard for prototyping circuits.',
+      specs:['830 tie points','Self-adhesive backing','Standard 2.54mm pitch'],
+      suitable:['Circuit Prototyping','Lab Work']},
+    {id:'p10', name:'Jumper Wires (40pc, M-M)',   cat:'Wires & Connectors',    price:90,  stock:60, icon:'🧵', section:'equipment',
+      desc:'Male-to-male jumper wire pack for breadboard and module connections.',
+      specs:['40 wires, ~20cm each','Male-to-male pin ends','Assorted colors'],
+      suitable:['Circuit Prototyping','General Lab Use']},
+    {id:'p11', name:'9V Battery + Connector',     cat:'Power Supply',          price:70,  stock:45, icon:'🔋', section:'equipment',
+      desc:'Standard 9V battery with a snap-on connector cable for portable projects.',
+      specs:['9V alkaline battery','Snap connector included','Barrel-jack adaptable'],
+      suitable:['Portable Projects','Field Demos']},
+    {id:'p12', name:'BO Motor (DC Gear Motor)',   cat:'Motors & Actuators',    price:110, stock:28, icon:'⚙️', section:'equipment',
+      desc:'Low-cost geared DC motor, the standard choice for small robot chassis.',
+      specs:['3–12V operating range','With mounting bracket & wheel-ready shaft'],
+      suitable:['Robotics','Line Following Robots']},
+    {id:'p13', name:'Digital Multimeter',         cat:'Tools',                 price:550, stock:12, icon:'📟', section:'equipment',
+      desc:'Entry-level digital multimeter for voltage, current and continuity checks.',
+      specs:['DC/AC voltage & current','Continuity buzzer','Auto power-off'],
+      suitable:['Lab Diagnostics','General Troubleshooting']},
+    {id:'p14', name:'Soldering Iron Kit (60W)',   cat:'Tools',                 price:650, stock:10, icon:'🛠️', section:'equipment',
+      desc:'Adjustable-temperature soldering iron with stand, solder wire and tips.',
+      specs:['60W, adjustable temperature','Stand + tip cleaner included','Basic solder wire included'],
+      suitable:['PCB Assembly','Project Building']},
+    {id:'p15', name:'Resistor Kit (600pcs)',      cat:'Electronic Components', price:180, stock:20, icon:'🎚️', section:'equipment',
+      desc:'Assorted 1/4W resistor kit covering the common values used in coursework.',
+      specs:['30 common values × 20pcs','1/4W, ±5% tolerance','Organized storage box'],
+      suitable:['Circuit Labs','Component Stock-up']},
+
+    // ---- Reference book catalog (admin: edit these or add your own) ----
+    {id:'b1', name:'Add your first reference book', cat:'Textbooks', price:0, stock:0, icon:'📚', section:'books',
+      desc:'This is a placeholder — click Edit (as admin) to replace it with a real book, or use "+ Add Product" to add more.',
+      specs:[], suitable:[]}
+  ];
+
+  // ---- Shop sections & their categories ----
+  var MART_SECTIONS = [
+    {id:'equipment', label:'Project Equipment'},
+    {id:'books',     label:'Reference Books'}
+  ];
+  var MART_CATS_BY_SECTION = {
+    equipment: ['All','Development Boards','Sensors','Modules','Electronic Components','Motors & Actuators','Power Supply','Wires & Connectors','Tools'],
+    books:     ['All','Textbooks','Reference Books','Lab Manuals','Question Banks','Solution Guides']
+  };
+  var MART_SECTION_COPY = {
+    equipment: {title:'EEE Project Equipment', sub:'Development boards, sensors, modules and tools for lab work and projects — priced and stocked by T.E.S.T, so what you see is what you get.'},
+    books:     {title:'EEE Reference Books', sub:'Textbooks, reference books and lab manuals recommended for the EEE curriculum — priced and stocked by T.E.S.T.'}
+  };
+  function martCats(){ return MART_CATS_BY_SECTION[mart.activeSection] || MART_CATS_BY_SECTION.equipment; }
+
+  // ---- State ----
+  var mart = {
+    view: 'home',
+    activeSection: 'equipment',
+    activeCat: 'All',
+    cart: [],              // [{id, qty}]
+    currentProductId: null,
+    detailQty: 1,
+    orderSource: null,     // 'cart' | 'ordernow'
+    orderNowItem: null,    // {id, qty}
+    checkoutInfo: null,
+    orderItems: null,      // resolved items for the active order
+    orderId: null,
+    orderTotal: 0
+  };
+
+  function martFmt(n){ return '৳' + Number(n).toLocaleString('en-US'); }
+  function martProduct(id){ return martEffectiveProducts().find(function(p){ return p.id === id; }); }
+
+  function martToast(msg){
+    var t = document.getElementById('mart-toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(martToast._t);
+    martToast._t = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  // ---- Navigation ----
+  var MART_CRUMB_LABEL = {home:'T.E.S.T Mart', browse:'EEE Equipment', product:'Product', cart:'Cart',
+    checkout:'Your Information', summary:'Order Summary', payment:'Payment', payconfirm:'Confirm Payment', done:'Order Placed'};
+
+  function martGo(view){
+    mart.view = view;
+    document.querySelectorAll('.mart-view').forEach(function(v){ v.classList.remove('active'); });
+    document.getElementById('mart-view-' + view).classList.add('active');
+    document.getElementById('mart-cart-fab').classList.toggle('hide', view === 'done' || view === 'home');
+    martRenderCrumbs();
+    if(view === 'browse'){ martRenderSectionTabs(); martRenderSectionCopy(); martRenderGrid(); }
+    if(view === 'cart') martRenderCart();
+    window.scrollTo({top: document.getElementById('marketplace').offsetTop - 80, behavior:'smooth'});
+  }
+
+  function martRenderCrumbs(){
+    var trail = [{v:'home', l:'T.E.S.T Mart'}];
+    var order = ['browse','product','cart','checkout','summary','payment','payconfirm','done'];
+    var idx = order.indexOf(mart.view);
+    if(idx >= 0){
+      for(var i=0;i<=idx;i++){ trail.push({v:order[i], l:MART_CRUMB_LABEL[order[i]]}); }
+    }
+    var html = trail.map(function(t,i){
+      var isLast = i === trail.length - 1;
+      if(isLast) return '<span class="mc-here">' + t.l + '</span>';
+      return '<span class="mc-link" onclick="martGo(\'' + t.v + '\')">' + t.l + '</span><span class="mc-sep">›</span>';
+    }).join('');
+    document.getElementById('mart-crumbs').innerHTML = html;
+  }
+
+  function martUpdateCartBadge(){
+    var count = mart.cart.reduce(function(s,i){ return s + i.qty; }, 0);
+    var badge = document.getElementById('mart-cart-badge');
+    badge.textContent = count;
+    badge.classList.toggle('zero', count === 0);
+  }
+
+  // ---- Home / department grid ----
+  function martRenderDepartments(){
+    var html = MART_DEPTS.map(function(d){
+      if(d.live){
+        return '<button class="mart-dept-card available" onclick="martGo(\'browse\')">' +
+          '<span class="mart-dept-icon">' + d.icon + '</span>' +
+          '<div class="mart-dept-name">' + d.name + '</div>' +
+          '<span class="mart-dept-tag live">Available Now</span></button>';
+      }
+      return '<button class="mart-dept-card locked" onclick="martToast(\'' + d.name + ' equipment is coming soon — we are starting with EEE!\')">' +
+        '<span class="mart-dept-icon">' + d.icon + '</span>' +
+        '<div class="mart-dept-name">' + d.name + '</div>' +
+        '<span class="mart-dept-tag soon">Coming Soon</span></button>';
+    }).join('');
+    document.getElementById('mart-dept-grid').innerHTML = html;
+  }
+
+  // ---- Browse / product grid ----
+  function martRenderSectionTabs(){
+    var html = MART_SECTIONS.map(function(s){
+      return '<button class="mart-section-tab' + (s.id === mart.activeSection ? ' active' : '') + '" onclick="martSetSection(\'' + s.id + '\')">' + s.label + '</button>';
+    }).join('');
+    document.getElementById('mart-section-tabs').innerHTML = html;
+  }
+  function martRenderSectionCopy(){
+    var copy = MART_SECTION_COPY[mart.activeSection] || MART_SECTION_COPY.equipment;
+    document.getElementById('mart-browse-title').textContent = copy.title;
+    document.getElementById('mart-browse-sub').textContent = copy.sub;
+  }
+  function martSetSection(id){
+    mart.activeSection = id;
+    mart.activeCat = 'All';
+    martRenderSectionTabs();
+    martRenderSectionCopy();
+    martRenderGrid();
+  }
+  function martRenderChips(){
+    var html = martCats().map(function(c){
+      return '<button class="mart-chip' + (c === mart.activeCat ? ' active' : '') + '" onclick="martSetCat(\'' + c.replace(/'/g,"\\'") + '\')">' + c + '</button>';
+    }).join('');
+    document.getElementById('mart-chip-row').innerHTML = html;
+  }
+  function martSetCat(c){ mart.activeCat = c; martRenderChips(); martRenderGrid(); }
+
+  function martRenderGrid(){
+    martRenderChips();
+    var q = (document.getElementById('mart-search').value || '').toLowerCase().trim();
+    var list = martEffectiveProducts().filter(function(p){
+      var matchesSection = (p.section || 'equipment') === mart.activeSection;
+      var matchesCat = mart.activeCat === 'All' || p.cat === mart.activeCat;
+      var matchesQ = !q || p.name.toLowerCase().indexOf(q) > -1 || p.cat.toLowerCase().indexOf(q) > -1;
+      return matchesSection && matchesCat && matchesQ;
+    });
+    var grid = document.getElementById('mart-grid');
+    if(list.length === 0){
+      grid.innerHTML = '<div class="mart-empty">No products match that search. Try a different term or category.</div>';
+      return;
+    }
+    grid.innerHTML = list.map(function(p){
+      var stockClass = p.stock === 0 ? 'out' : (p.stock <= 5 ? 'low' : 'in');
+      var stockText = p.stock === 0 ? 'Out of Stock' : (p.stock <= 5 ? ('Only ' + p.stock + ' left') : 'In Stock');
+      return '<div class="mart-card">' +
+        '<div class="mart-card-icon">' + (p.photoUrl ? '<img src="'+p.photoUrl+'" alt="'+p.name+'">' : (p.icon||'🛒')) + '</div>' +
+        '<div class="mart-card-cat">' + p.cat + '</div>' +
+        '<div class="mart-card-name">' + p.name + '</div>' +
+        '<div class="mart-card-price">' + martFmt(p.price) + '</div>' +
+        '<div class="mart-stock ' + stockClass + '">' + stockText + '</div>' +
+        '<div class="mart-card-actions">' +
+          '<button class="btn-ghost" onclick="martOpenProduct(\'' + p.id + '\')">View</button>' +
+          '<button class="btn-primary"' + (p.stock === 0 ? ' disabled style="opacity:.5;cursor:not-allowed;"' : '') + ' onclick="martAddToCart(\'' + p.id + '\',1);event.stopPropagation();">Add to Cart</button>' +
+          (martIsAdmin ? '<button class="btn-ghost mart-edit-btn" title="Edit product" onclick="martOpenEditModal(\'' + p.id + '\');event.stopPropagation();">✏️</button>' : '') +
+        '</div></div>';
+    }).join('');
+  }
+
+  // ---- Product detail ----
+  function martOpenProduct(id){
+    mart.currentProductId = id;
+    mart.detailQty = 1;
+    martRenderProductDetail();
+    martGo('product');
+  }
+  function martRenderProductDetail(){
+    var p = martProduct(mart.currentProductId);
+    if(!p) return;
+    var stockClass = p.stock === 0 ? 'out' : (p.stock <= 5 ? 'low' : 'in');
+    var stockText = p.stock === 0 ? 'Out of Stock' : (p.stock <= 5 ? ('Only ' + p.stock + ' left in stock') : 'In Stock');
+    var disabled = p.stock === 0;
+    document.getElementById('mart-product-detail').innerHTML =
+      '<div class="mart-detail">' +
+        '<div>' +
+        '<div class="mart-detail-img">' + (p.photoUrl ? '<img src="'+p.photoUrl+'" alt="'+p.name+'">' : (p.icon||'🛒')) + '</div>' +
+        (martIsAdmin ?
+          '<div class="mart-photo-upload-row">' +
+            '<button type="button" class="btn-ghost" onclick="martOpenEditModal(\'' + p.id + '\')">✏️ Edit Product</button>' +
+          '</div>'
+        : '') +
+        '</div>' +
+        '<div>' +
+          '<div class="mart-card-cat">' + p.cat + '</div>' +
+          '<div class="mart-detail-name">' + p.name + '</div>' +
+          '<div class="mart-detail-price">' + martFmt(p.price) + '</div>' +
+          '<div class="mart-stock ' + stockClass + '">' + stockText + '</div>' +
+          '<p class="mart-detail-desc">' + p.desc + '</p>' +
+          '<div class="mart-info-title">Suitable For</div>' +
+          '<ul class="mart-spec-list">' + p.suitable.map(function(s){ return '<li>' + s + '</li>'; }).join('') + '</ul>' +
+          '<div class="mart-info-title">Specifications</div>' +
+          '<ul class="mart-spec-list">' + p.specs.map(function(s){ return '<li>' + s + '</li>'; }).join('') + '</ul>' +
+          '<div class="mart-qty-row">' +
+            '<div class="mart-stepper">' +
+              '<button type="button" onclick="martChangeDetailQty(-1)">−</button>' +
+              '<input id="mart-detail-qty" value="' + mart.detailQty + '" readonly/>' +
+              '<button type="button" onclick="martChangeDetailQty(1)">+</button>' +
+            '</div>' +
+            '<div class="mart-line-total">Total: <strong id="mart-detail-total">' + martFmt(p.price * mart.detailQty) + '</strong></div>' +
+          '</div>' +
+          '<div class="mart-detail-actions">' +
+            '<button class="btn-outline btn-lg"' + (disabled?' disabled style="opacity:.5;"':'') + ' onclick="martAddToCart(\'' + p.id + '\', mart.detailQty)">Add to Cart</button>' +
+            '<button class="btn-accent btn-lg"' + (disabled?' disabled style="opacity:.5;"':'') + ' onclick="martOrderNow(\'' + p.id + '\', mart.detailQty)">Order Now</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+  function martChangeDetailQty(delta){
+    var p = martProduct(mart.currentProductId);
+    mart.detailQty = Math.max(1, Math.min(p.stock || 99, mart.detailQty + delta));
+    document.getElementById('mart-detail-qty').value = mart.detailQty;
+    document.getElementById('mart-detail-total').textContent = martFmt(p.price * mart.detailQty);
+  }
+
+  // ---- Cart ----
+  function martAddToCart(id, qty){
+    var existing = mart.cart.find(function(i){ return i.id === id; });
+    if(existing){ existing.qty += qty; } else { mart.cart.push({id:id, qty:qty}); }
+    martUpdateCartBadge();
+    martToast(martProduct(id).name + ' added to cart');
+  }
+  function martOrderNow(id, qty){
+    mart.orderSource = 'ordernow';
+    mart.orderNowItem = {id:id, qty:qty};
+    martGo('checkout');
+  }
+  function martCartQty(id, delta){
+    var item = mart.cart.find(function(i){ return i.id === id; });
+    if(!item) return;
+    item.qty = Math.max(1, item.qty + delta);
+    martRenderCart();
+  }
+  function martCartRemove(id){
+    mart.cart = mart.cart.filter(function(i){ return i.id !== id; });
+    martUpdateCartBadge();
+    martRenderCart();
+  }
+  function martCartSubtotal(){
+    return mart.cart.reduce(function(s,i){ return s + martProduct(i.id).price * i.qty; }, 0);
+  }
+  function martRenderCart(){
+    var wrap = document.getElementById('mart-cart-items');
+    var sumWrap = document.getElementById('mart-cart-summary');
+    if(mart.cart.length === 0){
+      wrap.innerHTML = '<div class="mart-empty">Your cart is empty. Head back to the shop to add some equipment.</div>';
+      sumWrap.innerHTML = '';
+      return;
+    }
+    wrap.innerHTML = mart.cart.map(function(i){
+      var p = martProduct(i.id);
+      return '<div class="mart-cart-item">' +
+        '<div class="mart-cart-item-icon">' + p.icon + '</div>' +
+        '<div class="mart-cart-item-info">' +
+          '<div class="mart-cart-item-name">' + p.name + '</div>' +
+          '<div class="mart-cart-item-price">' + martFmt(p.price) + ' each</div>' +
+        '</div>' +
+        '<div class="mart-stepper">' +
+          '<button type="button" onclick="martCartQty(\'' + i.id + '\',-1)">−</button>' +
+          '<input value="' + i.qty + '" readonly/>' +
+          '<button type="button" onclick="martCartQty(\'' + i.id + '\',1)">+</button>' +
+        '</div>' +
+        '<div class="mart-cart-item-sub">' + martFmt(p.price * i.qty) + '</div>' +
+        '<button class="mart-cart-remove" onclick="martCartRemove(\'' + i.id + '\')" title="Remove">✕</button>' +
+      '</div>';
+    }).join('');
+    var subtotal = martCartSubtotal();
+    sumWrap.innerHTML = '<div class="mart-summary-box">' +
+      '<div class="mart-sum-row"><span>Subtotal</span><span>' + martFmt(subtotal) + '</span></div>' +
+      '<div class="mart-sum-row" style="font-size:0.78rem;color:var(--text3);">Delivery fee is calculated at checkout, based on receiving place.</div>' +
+      '</div>' +
+      '<button class="btn-primary" style="margin-top:1.25rem;" onclick="martProceedFromCart()">Proceed to Order</button>';
+  }
+  function martProceedFromCart(){
+    if(mart.cart.length === 0){ martToast('Your cart is empty'); return; }
+    mart.orderSource = 'cart';
+    martGo('checkout');
+  }
+
+  // ---- Checkout (student info) ----
+  function martTogglePlaceDetail(){
+    var place = document.getElementById('cf-place').value;
+    var wrap = document.getElementById('cf-place-detail-wrap');
+    var label = document.getElementById('cf-place-detail-label');
+    if(place === 'BUET Campus'){
+      wrap.style.display = 'block';
+      label.textContent = 'Preferred receiving location';
+      document.getElementById('cf-place-detail').placeholder = 'e.g. Cafeteria, TSC, Hall, Department';
+    } else if(place === 'Home Delivery' || place === 'Other'){
+      wrap.style.display = 'block';
+      label.textContent = place === 'Home Delivery' ? 'Delivery address' : 'Please specify';
+      document.getElementById('cf-place-detail').placeholder = place === 'Home Delivery' ? 'Full address' : 'Tell us where';
+    } else {
+      wrap.style.display = 'none';
+    }
+  }
+
+  function martResolveOrderItems(){
+    if(mart.orderSource === 'ordernow' && mart.orderNowItem){
+      return [{id: mart.orderNowItem.id, qty: mart.orderNowItem.qty}];
+    }
+    return mart.cart.map(function(i){ return {id:i.id, qty:i.qty}; });
+  }
+
+  function martDeliveryFee(place){
+    switch(place){
+      case 'BUET Campus': return 0;
+      case 'Dhaka University': return 60;
+      case 'Other University': return 80;
+      case 'Home Delivery': return 100;
+      default: return 70;
+    }
+  }
+
+  function martSubmitCheckout(e){
+    e.preventDefault();
+    var items = martResolveOrderItems();
+    if(items.length === 0){ martToast('No items to order'); martGo('browse'); return false; }
+    mart.checkoutInfo = {
+      name: document.getElementById('cf-name').value.trim(),
+      dept: document.getElementById('cf-dept').value,
+      batch: document.getElementById('cf-batch').value.trim(),
+      studentId: document.getElementById('cf-id').value.trim(),
+      phone: document.getElementById('cf-phone').value.trim(),
+      email: document.getElementById('cf-email').value.trim(),
+      place: document.getElementById('cf-place').value,
+      placeDetail: document.getElementById('cf-place-detail').value.trim()
+    };
+    mart.orderItems = items;
+    martRenderSummary();
+    martGo('summary');
+    return false;
+  }
+
+  // ---- Order summary ----
+  function martOrderMath(){
+    var subtotal = mart.orderItems.reduce(function(s,i){ return s + martProduct(i.id).price * i.qty; }, 0);
+    var delivery = martDeliveryFee(mart.checkoutInfo.place);
+    return {subtotal: subtotal, delivery: delivery, total: subtotal + delivery};
+  }
+
+  function martRenderSummary(){
+    var info = mart.checkoutInfo;
+    var math = martOrderMath();
+    var itemsHtml = mart.orderItems.map(function(i){
+      var p = martProduct(i.id);
+      return '<div class="mart-info-row"><span>' + p.name + ' × ' + i.qty + '</span><strong>' + martFmt(p.price * i.qty) + '</strong></div>';
+    }).join('');
+    var placeLine = info.place + (info.placeDetail ? (' — ' + info.placeDetail) : '');
+    document.getElementById('mart-summary-body').innerHTML =
+      '<div class="mart-info-card">' +
+        '<div class="mart-info-title">Customer</div>' +
+        '<div class="mart-info-row"><span>Name</span><strong>' + info.name + '</strong></div>' +
+        '<div class="mart-info-row"><span>Department</span><strong>' + info.dept + '</strong></div>' +
+        '<div class="mart-info-row"><span>Batch</span><strong>' + info.batch + '</strong></div>' +
+        '<div class="mart-info-row"><span>Student ID</span><strong>' + info.studentId + '</strong></div>' +
+        '<div class="mart-info-row"><span>Phone</span><strong>' + info.phone + '</strong></div>' +
+        (info.email ? '<div class="mart-info-row"><span>Email</span><strong>' + info.email + '</strong></div>' : '') +
+        '<div class="mart-info-row"><span>Receiving</span><strong>' + placeLine + '</strong></div>' +
+      '</div>' +
+      '<div class="mart-info-card">' +
+        '<div class="mart-info-title">Order Items</div>' + itemsHtml +
+      '</div>' +
+      '<div class="mart-summary-box">' +
+        '<div class="mart-sum-row"><span>Subtotal</span><span>' + martFmt(math.subtotal) + '</span></div>' +
+        '<div class="mart-sum-row"><span>Delivery Fee</span><span>' + (math.delivery === 0 ? 'Free' : martFmt(math.delivery)) + '</span></div>' +
+        '<div class="mart-sum-row total"><span>Total</span><span>' + martFmt(math.total) + '</span></div>' +
+      '</div>';
+  }
+
+  // ---- Confirm order → generate ID → payment ----
+  function martGenerateOrderId(){
+    var d = new Date();
+    var y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), day = String(d.getDate()).padStart(2,'0');
+    var rand = String(Math.floor(Math.random()*900)+100);
+    return 'TEST-' + y + m + day + '-' + rand;
+  }
+
+  function martConfirmOrder(){
+    var math = martOrderMath();
+    mart.orderId = martGenerateOrderId();
+    mart.orderTotal = math.total;
+    document.getElementById('mart-pay-box').innerHTML =
+      '<div class="mart-info-title">Send Payment To</div>' +
+      '<div class="mart-pay-amount">' + martFmt(mart.orderTotal) + '</div>' +
+      '<div class="mart-pay-field"><span class="mart-pay-field-label">bKash Number</span><span class="mart-pay-field-val">' + BKASH_NUMBER + '</span><button class="mart-copy-btn" onclick="martCopy(\'' + BKASH_NUMBER + '\')">Copy</button></div>' +
+      '<div class="mart-pay-field"><span class="mart-pay-field-label">Payment Type</span><span class="mart-pay-field-val">Send Money</span></div>' +
+      '<div class="mart-pay-field"><span class="mart-pay-field-label">Reference</span><span class="mart-pay-field-val">' + mart.orderId + '</span><button class="mart-copy-btn" onclick="martCopy(\'' + mart.orderId + '\')">Copy</button></div>' +
+      '<div class="mart-warn">⚠️ Please send the exact amount shown above and keep your bKash transaction ID — you\'ll need it on the next step.</div>';
+    martGo('payment');
+  }
+
+  function martCopy(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ martToast('Copied: ' + text); }).catch(function(){ martToast(text); });
+    } else { martToast(text); }
+  }
+
+  // ---- Payment confirmation ----
+  function martSubmitPayment(e){
+    e.preventDefault();
+    if(!document.getElementById('pf-confirm').checked){ martToast('Please confirm you have completed the payment'); return false; }
+    document.getElementById('mart-done-id').textContent = 'Order ID: ' + mart.orderId;
+    document.getElementById('mart-done-amount').textContent = 'Total: ' + martFmt(mart.orderTotal);
+    if(mart.orderSource === 'cart'){ mart.cart = []; martUpdateCartBadge(); }
+    mart.orderNowItem = null;
+    martGo('done');
+    return false;
+  }
+
+  function martShareWhatsApp(){
+    if(!mart.orderId || !mart.checkoutInfo || !mart.orderItems) return;
+    var info = mart.checkoutInfo;
+    var math = martOrderMath();
+    var lines = [
+      '🛒 T.E.S.T MART ORDER',
+      '',
+      'Order ID: ' + mart.orderId,
+      '',
+      'Name: ' + info.name,
+      'Department: ' + info.dept,
+      'Batch: ' + info.batch,
+      'Student ID: ' + info.studentId,
+      'Phone: ' + info.phone,
+      'Receiving: ' + info.place + (info.placeDetail ? (' — ' + info.placeDetail) : ''),
+      ''
+    ];
+    mart.orderItems.forEach(function(i){
+      var p = martProduct(i.id);
+      lines.push(p.name + ' × ' + i.qty + ' — ' + martFmt(p.price * i.qty));
+    });
+    lines.push('');
+    lines.push('Subtotal: ' + martFmt(math.subtotal));
+    lines.push('Delivery: ' + (math.delivery === 0 ? 'Free' : martFmt(math.delivery)));
+    lines.push('Total: ' + martFmt(math.total));
+    lines.push('');
+    lines.push('Payment: bKash — Verification Pending');
+    var text = encodeURIComponent(lines.join('\n'));
+    window.open('https://wa.me/?text=' + text, '_blank');
+  }
+
+  function martResetToHome(){
+    mart.orderSource = null;
+    mart.checkoutInfo = null;
+    mart.orderItems = null;
+    mart.orderId = null;
+    document.getElementById('mart-checkout-form').reset();
+    document.getElementById('mart-pay-form').reset();
+    document.getElementById('cf-place-detail-wrap').style.display = 'none';
+    martGo('home');
+  }
+
+  // Prefill payment amount once payconfirm view is shown
+  document.addEventListener('DOMContentLoaded', function(){
+    martRenderDepartments();
+    martRenderChips();
+    martUpdateCartBadge();
+    var origGo = martGo;
+    martGo = function(view){
+      origGo(view);
+      if(view === 'payconfirm'){ document.getElementById('pf-amount').value = mart.orderTotal; }
+    };
+  });
+</script>
+
+</body>
+</html>
